@@ -1,0 +1,24 @@
+<!-- nav bar de la aplicación -->
+<div class="topnav" id="nav_bar">
+    <div class="topnav_links">
+        <div class="img_nav">
+          <img src="../../../../../assets/logo_provisional-02.png" alt="TriviaQuiz Logo" />
+        </div>
+        <a href="#news">News</a>
+        <a href="#contact">Contact</a>
+        <a href="#about">About</a>
+    </div>
+
+    <!-- Tenemos que considerar que exista el icono del usuario y que también redirija al register o login -->
+    <div class="d-flex justify-content-center align-items-center gap-2">
+      <div class="register_login_btn me-2">
+        <button class="btn_register text-light">register
+          <i class="fa-solid fa-user ms-2"></i>
+        </button>
+      </div>
+
+      <a href="javascript:void(0);" class="icon" (click)="myFunction()">
+        <i class="fa fa-bars"></i>
+      </a>
+  </div>
+</div>

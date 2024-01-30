@@ -1,0 +1,53 @@
+<!-- Esta es mi página inicial, desde donde podremos redirigirnos al login o register o comenzar a hacer un trivia quiz si ya estamos registrados! -->
+<div>
+    <header class="header" id="header">
+        <div class="container">
+            <div class="header_wrap">
+                <div class="title">
+                    <!-- <h1>TriviaQuiz NextGen</h1> -->
+                    <img src="/assets/logo_provisional-02.png" alt="TriviaQuiz Logo" />
+                    <h4>Ponte a prueba y <span class="title_span_color">demuestra lo que sabes de actualidad!</span></h4>
+                    <hr style="color: #5eff01;">
+                </div>
+            </div>
+    </div>
+    </header>
+
+    <!-- El main nos puede reconducir a la página de registro o a realizar una trivia -->
+    <div class="wrapper_contained">
+        <main class="wrapper">
+            <!-- REDIRIGIMOS A LA PÁGINA DE REGISTRO -->
+            <section class="go_to_register">
+                <div class="glow_card_bg">
+                    <div class="card_content go_register_card">
+                        <h4>Antes de empezar a jugar...</h4>
+                        <p class="text-start mt-4">Es necesario que crees una cuenta de usuario para poder empezar a jugar a TriviaQuiz.
+                            <br><br>
+                            <span class="">¡Podrás entrar en la clasificatoria y competir contra el resto de usuarios!</span>
+                        </p>
+                        <button class="mt-4">registro<span class="fw-bolder"> / </span>login</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- CARD PARA REALIZAR UNA TRIVIA -->
+            <section class="go_to_trivia">
+                <div class="glow_card_bg">
+                    <div class="card_content go_register_card">
+                        <h4><span class="color_pink_h4">Let's play</span> Trivia!</h4>
+                        <p class="text-light mb-5 mt-4">Elige entre trivia normal o selecciona las categorías para tu juego <span class="text-info">(mínimo 3)</span></p>
+                        <div class="trivia_game_options">
+                            <button class="random_trivia_btn">Generate Random Trivia</button>
+
+                            <select>
+
+                            </select>
+
+                            <button class="categorized_trivia_btn">categorized trivia</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+</div>

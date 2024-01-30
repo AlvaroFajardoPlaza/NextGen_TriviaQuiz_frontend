@@ -1,0 +1,20 @@
+@font-face {
+    font-family: "radwave";
+    src: url("../assets/Radwave.otf") format("otf");
+}
+
+@font-face {
+    font-family: "syne";
+    src: url("../assets/syne.ttf") format("ttf");
+}
+
+.full_container {
+    font-family: "syne";
+    font-size: 1.2rem;
+    line-height: 1.5rem;
+    font-weight: 400;
+}
+
+.horizontal_nav_bar {
+    position: sticky;
+}

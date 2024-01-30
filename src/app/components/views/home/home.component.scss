@@ -1,0 +1,235 @@
+h4 {
+    font-family: "radwave", Helvetica, sans-serif;
+}
+
+.header {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+
+    color: white;
+    padding: 2rem 0rem;
+
+    background: linear-gradient(-45deg, #e73c7e, black, #5eff01);
+    background-size: 400% 400%;
+    animation: gradient 15s ease infinite;
+}
+
+@keyframes gradient {
+    0% {
+        background-position: 20% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 20% 50%;
+    }
+}
+
+// .title h1 {
+//     font-size: 4rem;
+// }
+
+.title img {
+    margin-left: -2rem;
+    cursor: pointer;
+    width: 24dvw;
+}
+
+.title_span_color {
+    color: #5eff01;
+    text-decoration: underline;
+}
+
+// El wrapper de todo el contenido debe presentarse como un grid
+.wrapper_contained {
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #000000;
+}
+
+.wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+    grid-auto-rows: 1fr;
+    grid-template-areas:
+        "register trivia";
+    // gap: 2rem;
+
+    padding: 4rem 0;
+    overflow: hidden;
+}
+
+.wrapper section {
+    margin: 2rem;
+}
+
+.go_to_register {
+    grid-area: register;
+}
+
+.go_to_trivia {
+    grid-area: trivia;
+}
+
+.glow_card_bg {
+    background-color: white;
+    // aspect-ratio: 1 / 1.5;
+    // width: 40dvw;
+
+    border-radius: 2rem;
+    position: relative;
+    z-index: 0
+}
+
+.glow_card_bg>* {
+    position: relative;
+    z-index: 1;
+}
+
+/* @PROPERTY para crear nuestra variable personalizada de gradiente animado*/
+@property --gradient-angle {
+    syntax: "<angle>";
+    initial-value: 0deg;
+    inherits: false;
+}
+
+.glow_card_bg::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: inherit;
+
+
+    background: #5eff01ba;
+    // background: linear-gradient(var(--gradient-angle),
+    //         var(red),
+    //         var(green));
+    // animation: rotation 10s linear infinite;
+
+
+    filter: blur(8px)
+}
+
+// @keyframes rotation {
+//     0% {
+//         --gradient-angle: 0deg;
+//     }
+
+//     100% {
+//         --gradient-angle: 720deg;
+//     }
+// }
+
+
+.card_content {
+    text-align: center;
+    background-color: rgb(33, 33, 33);
+    position: relative;
+    width: 100%;
+    height: 100%;
+    z-index: 99;
+
+    padding: 2rem;
+
+    border-radius: inherit;
+    border: 1px solid white;
+
+    color: #5eff01;
+}
+
+.card_content .color_pink_h4 {
+    color: #ff2eb2;
+}
+
+.go_register_card p {
+    color: white;
+}
+
+.go_register_card span {
+    font-weight: 700;
+}
+
+
+.trivia_game_options {
+    display: grid;
+    gap: 1rem;
+    grid-column: 1fr 1fr;
+    grid-row: 0.6fr 1fr;
+    grid-template-areas:
+        "random select"
+        "random categorized"
+    ;
+}
+
+.random_trivia_btn {
+    grid-area: random;
+}
+
+.trivia_game_options select {
+    grid-area: select;
+}
+
+.categorized_trivia_btn {
+    grid-area: categorized;
+}
+
+button {
+    background-color: #000000;
+
+    font-size: 1.4rem;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-family: "radwave", Helvetica, sans-serif;
+    line-height: 1.4rem;
+
+    color: #5eff01;
+    padding: 0.8rem;
+    border-radius: 1rem;
+    border: 1px solid #cecece;
+}
+
+button:hover {
+    background-color: #ff2eb2;
+    color: white;
+}
+
+@media only screen and (min-width: 481px) and (max-width: 1100px) {
+    .wrapper {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr;
+        grid-template-areas:
+            "register trivia"
+        ;
+    }
+
+    .title img {
+        width: 12rem;
+        margin-left: 0;
+    }
+}
+
+@media only screen and (max-width: 480px) {
+    .wrapper {
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr;
+        grid-auto-rows: 1fr;
+        grid-template-areas:
+            "register"
+            "trivia"
+        ;
+    }
+
+    .title img {
+        width: 20rem;
+        margin-left: 0;
+
+    }
+}
