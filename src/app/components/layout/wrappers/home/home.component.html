@@ -1,4 +1,5 @@
 <!-- Esta es mi página inicial, desde donde podremos redirigirnos al login o register o comenzar a hacer un trivia quiz si ya estamos registrados! -->
+<app-nav></app-nav>
 <div>
     <header class="header" id="header">
         <div class="container">
@@ -37,10 +38,10 @@
                         <h4><span class="color_pink_h4">Let's play</span> Trivia!</h4>
                         <p class="text-light mb-5 mt-4">Elige entre trivia normal o selecciona las categorías para tu juego <span class="text-info">(mínimo 3)</span></p>
                         <div class="trivia_game_options">
-                            <button class="random_trivia_btn">Generate Random Trivia</button>
+                            <button class="random_trivia_btn" (click)="goToRandomTrivia()" >Generate Random Trivia</button>
 
                             <select>
-
+                                <option>Hacemos un *ngFor por las categorías</option>
                             </select>
 
                             <button class="categorized_trivia_btn">categorized trivia</button>
@@ -51,3 +52,5 @@
         </main>
     </div>
 </div>
+
+<app-footer></app-footer>

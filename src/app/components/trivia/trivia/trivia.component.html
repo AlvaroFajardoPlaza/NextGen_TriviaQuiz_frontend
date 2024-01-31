@@ -1,0 +1,33 @@
+<!-- Dentro de este template vamos a recibir los datos del primer trivia test -->
+<!-- Hay que plantear el <li> dentro de la order list mediante un *ngFor de tal manera que realice un bucle por todas las preguntas que recibimos en nuestro servicio -->
+
+<!-- <pre>{{ triviaTest$ | async | json }}</pre> -->
+<section class="random_trivia_test">
+    <div class="trivia_wrapper">
+        <button class="button go_back_button" (click)="navigateHome()"><i class="fa-solid fa-angles-left"></i> Go back</button>
+
+        <ol class="trivia_list">
+            <li class="trivia_list_item" *ngFor="let item of triviaTest$ | async; let i = index">
+                <h4 class="list_item_category">{{item.category}}</h4>
+
+                <hr>
+                <div class="d-flex gap-4 justify-content-start align-items-center">
+                    <h1 class="list_item_num align-self-start">{{ i + 1 }}</h1>
+                    <h4 class="list_item_question">{{ item.pregunta }}</h4>
+                </div>
+
+                <div class="trivia_list_answer_wrapper mt-2">
+                    <!-- Dentro de este select tenemos las tres posibles respuestas a la pregunta anterior -->
+                    <select>
+                        <option disabled value="">Por favor, selecciona una:</option>
+                        <option value="Answer 1">{{ item.wrong1 }}</option>
+                        <option value="Answer 2">{{ item.right }}</option>
+                        <option value="Answer 3">{{ item.wrong2 }}</option>
+                    </select>
+                </div>
+            </li>
+        </ol>
+
+        <button class="button send_answers_button" (click)="getResults()">Send my answers <i class="fa-solid fa-angles-right"></i></button>
+    </div>
+</section>
