@@ -4,15 +4,33 @@
 <!-- <pre>{{ triviaTest$ | async | json }}</pre> -->
 <section class="random_trivia_test">
     <div class="trivia_wrapper">
-        <button class="button go_back_button" (click)="navigateHome()"><i class="fa-solid fa-angles-left"></i> Go back</button>
+        
+        <!-- Este botón activa un pop-up modal que pregunta si queremos volver a la Homepage -->
+		<div class="trivia_head_ d-flex gap-4 justify-content-between align-items-center">
+			<button 
+				class="button go_back_button" 
+				data-bs-toggle="modal"
+				data-bs-target="#backToHomepage"
+				(click)="openGoBackModal()"
+				><i class="fa-solid fa-angles-left"></i> Go back
+			</button>
+
+			<span class="counter">{{ initialCounter }}</span>
+		</div>
 
         <ol class="trivia_list">
             <li class="trivia_list_item" *ngFor="let item of triviaTest$ | async; let i = index">
-                <h4 class="list_item_category">{{item.category}}</h4>
+
+				<div class="d-flex gap-4 justify-content-between align-items-center">
+					<h1 class="list_item_num align-self-start">{{ i + 1 }}</h1>
+					<div class="list_item_category align-self-start">
+						<h4>{{item.category}}</h4>
+					</div>
+				</div>
 
                 <hr>
                 <div class="d-flex gap-4 justify-content-start align-items-center">
-                    <h1 class="list_item_num align-self-start">{{ i + 1 }}</h1>
+                    <!-- <h1 class="list_item_num align-self-start">{{ i + 1 }}</h1> -->
                     <h4 class="list_item_question">{{ item.pregunta }}</h4>
                 </div>
 
@@ -20,14 +38,60 @@
                     <!-- Dentro de este select tenemos las tres posibles respuestas a la pregunta anterior -->
                     <select>
                         <option disabled value="">Por favor, selecciona una:</option>
-                        <option value="Answer 1">{{ item.wrong1 }}</option>
-                        <option value="Answer 2">{{ item.right }}</option>
-                        <option value="Answer 3">{{ item.wrong2 }}</option>
+                        <option value="Answer 1">{{ item.ans2 }}</option>
+                        <option value="Answer 2">{{ item.ans1 }}</option>
+                        <option value="Answer 3">{{ item.ans3 }}</option>
                     </select>
                 </div>
             </li>
         </ol>
 
-        <button class="button send_answers_button" (click)="getResults()">Send my answers <i class="fa-solid fa-angles-right"></i></button>
+        <!-- Provisionalmente, y hasta que manejemos los resultados del test, 
+		el botón de send-results devolverá al usuario a la HomePage -->
+        <button 
+            class="button send_answers_button" 
+            (click)="navigateHome()"
+            >Send my answers <i class="fa-solid fa-angles-right"></i>
+        </button>
     </div>
 </section>
+
+<!-- Nuestros pop-up modales -->
+<div
+	class="modal fade"
+	tabindex="-1"
+	id="backToHomepage"
+	aria-labelledby="backToHomepage"
+	aria-hidden="true"
+>
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-body">
+				<p class="lead mt-3">
+					¿Estás seguro de que quieres volver a la página de inicio?
+				</p>
+				<p class="text-danger">
+					Atención: una vez que abandones esta trivia, no se guardarán tus resultados. ****
+				</p>
+			</div>
+			<div class="modal-footer">
+				<button
+					type="button"
+					class="btn btn-secondary"
+					data-bs-dismiss="modal"
+				>
+					Cancelar
+				</button>
+				<button
+					(click)="navigateHome()"
+					type="button"
+					class="btn btn-danger"
+					data-bs-dismiss="modal"
+				>
+					<i class="fa fa-square-minus"></i>
+					Go back
+				</button>
+			</div>
+		</div>
+	</div>
+</div>

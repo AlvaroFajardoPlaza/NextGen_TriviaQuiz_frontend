@@ -7,7 +7,7 @@
                 <div class="title">
                     <!-- <h1>TriviaQuiz NextGen</h1> -->
                     <img src="/assets/logo_provisional-02.png" alt="TriviaQuiz Logo" />
-                    <h4>Ponte a prueba y <span class="title_span_color">demuestra lo que sabes de actualidad!</span></h4>
+                    <h4>Test your knowledge and<span class="title_span_color"> show what you know about the news!</span></h4>
                     <hr style="color: #5eff01;">
                 </div>
             </div>
@@ -21,12 +21,13 @@
             <section class="go_to_register">
                 <div class="glow_card_bg">
                     <div class="card_content go_register_card">
-                        <h4>Antes de empezar a jugar...</h4>
-                        <p class="text-start mt-4">Es necesario que crees una cuenta de usuario para poder empezar a jugar a TriviaQuiz.
+                        <h4>Before you start...</h4>
+                        <p class="text-start mt-4">You need to create a user account to start playing TriviaQuiz.
+
                             <br><br>
-                            <span class="">¡Podrás entrar en la clasificatoria y competir contra el resto de usuarios!</span>
+                            <span class="">You will be able to enter the classification and compete against other users!</span>
                         </p>
-                        <button class="mt-4">registro<span class="fw-bolder"> / </span>login</button>
+                        <button class="mt-4">register<span class="fw-bolder"> / </span>login</button>
                     </div>
                 </div>
             </section>
@@ -36,12 +37,12 @@
                 <div class="glow_card_bg">
                     <div class="card_content go_register_card">
                         <h4><span class="color_pink_h4">Let's play</span> Trivia!</h4>
-                        <p class="text-light mb-5 mt-4">Elige entre trivia normal o selecciona las categorías para tu juego <span class="text-info">(mínimo 3)</span></p>
+                        <p class="text-light mb-5 mt-4">Choose between normal trivia or select categories for your game  <span class="text-info">(minimum 3)</span>.</p>
                         <div class="trivia_game_options">
                             <button class="random_trivia_btn" (click)="goToRandomTrivia()" >Generate Random Trivia</button>
 
-                            <select>
-                                <option>Hacemos un *ngFor por las categorías</option>
+                            <select multiple>
+                                <option *ngFor="let category of categories$ | async" [value]="category.name">{{ category.name }}</option>
                             </select>
 
                             <button class="categorized_trivia_btn">categorized trivia</button>

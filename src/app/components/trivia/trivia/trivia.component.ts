@@ -17,10 +17,38 @@ export class TriviaComponent implements OnInit{
 
   triviaTest$: Observable<Array<any>> = this._triviaSvc.getRandomTrivia();
   randomTest: Array<TriviaElement> = [];
-  subscription: Subscription | undefined // La subscripcción nos es útil para manejar el ciclo de vida del componente
+
+  categories$: Observable<Array<any>> = this._triviaSvc.getCategories();
 
   ngOnInit(): void {
     console.log("renderizamos el componente trivia")
+    this.oneMinuteCounter()
+    // Aquí vamos a crear un contador y se inicia cuando comienza el componente
+    // Cuando se acaba el tiempo, se envían los resultados.
+
+  }
+
+
+  // El initialCounter puede ser una variable que manejen los usuarios
+  initialCounter: number = 45
+  oneMinuteCounter() {
+    const count: any = document.querySelector(".counter")
+    // let counter = 60
+
+    setInterval(() => {
+      if(this.initialCounter > 0) {
+        this.initialCounter--;
+        count.innerHTML = this.initialCounter.toString();
+      } else {
+        this.navigateHome()
+      }
+    }, 1000)
+  }
+
+
+  openGoBackModal() {
+    console.log("abrimos modal");
+    this.navigateHome();
   }
 
   navigateHome() {

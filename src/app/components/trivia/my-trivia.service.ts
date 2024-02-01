@@ -15,4 +15,10 @@ export class MyTriviaService {
   getRandomTrivia(): Observable<Array<TriviaElement>> {
     return this._http.get<Array<TriviaElement>>(`${environment.baseUrl}/trivia`)
   }
+
+  // Llamamos a las categorías
+  getCategories(): Observable<Array<any>> {
+    return this._http.get<Array<any>>(`${environment.baseUrl}/categories`)
+  }
+
 }

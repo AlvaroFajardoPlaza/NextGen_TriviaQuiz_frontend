@@ -11,8 +11,10 @@ import { LoginComponent } from './components/auth/login/login.component';
 import { TriviaWrapperComponent } from './components/layout/wrappers/trivia-wrapper/trivia-wrapper.component';
 import { AuthWrapperComponent } from './components/layout/wrappers/auth-wrapper/auth-wrapper.component';
 import { TriviaComponent } from './components/trivia/trivia/trivia.component';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { PopUpComponent } from './components/layout/pop-up/pop-up.component';
+
 
 @NgModule({
   declarations: [
@@ -24,7 +26,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     LoginComponent,
     TriviaWrapperComponent,
     AuthWrapperComponent,
-    TriviaComponent
+    TriviaComponent,
+    PopUpComponent
   ],
   imports: [
     BrowserModule,

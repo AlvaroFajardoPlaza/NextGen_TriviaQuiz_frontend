@@ -12,7 +12,30 @@
 
 
     padding: 4rem 0;
+}
 
+.trivia_head_ {
+    width: 100%;
+}
+
+.trivia_head_ .counter {
+    font-size: 2.8rem;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-family: "radwave", Helvetica, sans-serif;
+    line-height: 1.4rem;
+
+    background-color: #000000;
+    color: #5eff01;
+
+    border: 1px solid white;
+    padding: 1.4rem 1rem 1rem 1rem;
+    border-radius: 1rem;
+
+    user-select: none;
+
+    box-shadow: 8px 8px rgb(55, 55, 55), 14px 14px rgb(100, 100, 100);
+    ;
 }
 
 .trivia_list {
@@ -49,6 +72,28 @@
     border: 1px solid #ff2eb2;
     box-shadow: 8px 8px rgb(175, 175, 175),
     14px 14px rgb(222, 222, 222);
+}
+
+.list_item_category {
+    width: fit-content;
+    border: 1px solid #5eff01b8;
+    background-color: #123200c8;
+    border-radius: 3rem;
+
+    padding: .2rem .8rem;
+}
+
+.list_item_category h4 {
+    font-size: 1rem;
+    padding-top: .4rem;
+    color: #5eff01;
+
+    user-select: none;
+}
+
+hr {
+    margin-top: 4px;
+    margin-bottom: 8px;
 }
 
 .list_item_question {

@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './components/layout/wrappers/home/home.component';
 import { AuthWrapperComponent } from './components/layout/wrappers/auth-wrapper/auth-wrapper.component';
 import { TriviaWrapperComponent } from './components/layout/wrappers/trivia-wrapper/trivia-wrapper.component';
+import { PopUpComponent } from './components/layout/pop-up/pop-up.component';
 
 const routes: Routes = [
 
@@ -12,6 +13,8 @@ const routes: Routes = [
 
   // Las siguientes rutas corresponden con los trivia quizs y los usuarios identificados --> Auth Guard
   { path: 'trivia', component: TriviaWrapperComponent },
+
+  { path: 'pop-up', component: PopUpComponent}
 
   // To do -----> Crear panel de usuario con respuestas completadas y score.
   //              Crear panel de resultados con los scores de los jugadores. 
