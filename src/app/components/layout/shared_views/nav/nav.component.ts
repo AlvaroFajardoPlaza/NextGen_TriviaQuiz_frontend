@@ -26,9 +26,12 @@ export class NavComponent {
     this._router.navigate(['']);
   }
 
-  goToRandomTrivia() {
-    this._router.navigate(['trivia'])
-  }
+  // goToRandomTrivia() {
+  //   this._router.navigate(['trivia'])
+  // }
 
+  navigateToRegister() {
+    this._router.navigate(['auth']);
+  }
 
 }

@@ -1,1 +1,17 @@
-<p>login works!</p>
+<div class="loginCard">
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <h4 class="register_card_title">login</h4>
+
+        <div>
+            <label class="form-label" for="username" >Username<span class="text-danger">*</span></label>
+            <input type="text" class="form-control" id="username" formControlName="username" required />
+        </div>
+
+        <div>
+            <label class="form-label" for="password" >Password<span class="text-danger">*</span></label>
+            <input type="password" class="form-control" id="password" formControlName="password" required />
+        </div>
+
+        <button>let's go!</button>
+    </form>
+</div>

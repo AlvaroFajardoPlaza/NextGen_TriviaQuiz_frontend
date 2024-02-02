@@ -18,4 +18,8 @@ export class HomeComponent {
   goToRandomTrivia() {
     this.__router.navigate(['trivia']);
   }
+
+  navigateToRegisterLogin() {
+    this.__router.navigate(['auth'])
+  }
 }

@@ -1,4 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
 
 /* Importing Bootstrap SCSS file. */
+// Podemos añadir y editar estilos globales en este fichero, siempre antes de hacer el import de bootstrap
+$primary: gold !default;
+
+
 @import 'bootstrap/scss/bootstrap';

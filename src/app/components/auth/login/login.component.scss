@@ -1,0 +1,77 @@
+h4 {
+    font-family: "radwave", Helvetica, sans-serif;
+    color: #5eff01;
+
+}
+
+.loginCard form {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    row-gap: 1.6rem;
+
+    width: fit-content;
+
+    padding: 2rem;
+    border-radius: 2rem;
+
+    background-color: #303030;
+    color: white;
+    border: 1px solid white;
+}
+
+
+.loginCard form label {
+    align-self: flex-start;
+}
+
+.loginCard form input {
+    background-color: #151515;
+    color: white;
+
+    padding: .6rem 1rem;
+    border-radius: 1rem;
+
+    border: 1px solid white;
+}
+
+button {
+    background-color: #000000;
+
+    font-size: 1.4rem;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-family: "radwave", Helvetica, sans-serif;
+    line-height: 1.4rem;
+
+    color: #5eff01;
+    padding: 0.8rem;
+    border-radius: 1rem;
+    border: 1px solid #cecece;
+
+    transition:
+        background-color 0.3s cubic-bezier(0.46, 0.03, 0.56, 0.95),
+        color 0.3s cubic-bezier(0.46, 0.03, 0.56, 0.95),
+        box-shadow 0.3s cubic-bezier(0.46, 0.03, 0.56, 0.95);
+}
+
+button:hover {
+    background-color: #ff2eb2;
+    color: white;
+
+    box-shadow:
+        4px 4px #5eff01,
+        7px 7px #FFF;
+}
+
+.loginCard:hover {
+    h4 {
+        color: #ff2eb2;
+    }
+
+    form {
+        background-color: #212121;
+        box-shadow: 8px 8px #303030;
+    }
+}

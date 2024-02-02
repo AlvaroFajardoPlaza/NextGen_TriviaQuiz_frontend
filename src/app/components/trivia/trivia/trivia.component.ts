@@ -23,9 +23,7 @@ export class TriviaComponent implements OnInit{
   ngOnInit(): void {
     console.log("renderizamos el componente trivia")
     this.oneMinuteCounter()
-    // Aquí vamos a crear un contador y se inicia cuando comienza el componente
-    // Cuando se acaba el tiempo, se envían los resultados.
-
+    // console.log(this.triviaTest$)
   }
 
 
@@ -48,7 +46,7 @@ export class TriviaComponent implements OnInit{
 
   openGoBackModal() {
     console.log("abrimos modal");
-    this.navigateHome();
+    // this.navigateHome();
   }
 
   navigateHome() {
