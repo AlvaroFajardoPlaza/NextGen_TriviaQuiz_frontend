@@ -29,20 +29,72 @@ h4 {
     }
 }
 
-// .title h1 {
-//     font-size: 4rem;
-// }
+.title {
+    height: 64dvh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
-.title h4,
-.title span {
+.title_info_content {
+    // border: 1px solid red;
+    position: absolute;
+    z-index: 1;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.title_info_content h4 {
+    margin-top: 2rem;
     mix-blend-mode: color-dodge;
 }
 
-.title img {
-    margin-left: -2rem;
-    cursor: pointer;
-    width: 24dvw;
+hr {
+    margin-top: 1rem;
+    width: 100%;
+    border: .6px solid white;
+    mix-blend-mode: color-burn;
 }
+
+.trivia_quiz_logo_container {
+    width: 100%;
+    margin: 2rem 0;
+}
+
+.trivia_quiz_logo_container img {
+    width: 28dvw;
+    transition:
+        scale 0.3s cubic-bezier(0.46, 0.03, 0.56, 0.95);
+}
+
+.trivia_quiz_logo_container img:hover {
+    cursor: pointer;
+    scale: 102%;
+    filter: contrast(20);
+}
+
+.imago_logo_container {
+    // border: 1px solid blue;
+    position: absolute;
+    z-index: 0;
+
+    mix-blend-mode: difference;
+}
+
+.title .imago_logo_container img {
+    width: 64%;
+}
+
+// .title img {
+//     margin-left: -2.4rem;
+//     cursor: pointer;
+//     width: 32rem;
+
+//     mix-blend-mode: difference;
+// }
 
 .title_span_color {
     color: #5eff01;
@@ -58,7 +110,48 @@ h4 {
     background-color: #000000;
 }
 
+.wrapper_contained .grid {
+    position: absolute;
+    z-index: 0;
+    width: 100%;
+
+    overflow: hidden;
+    padding: 1rem 0;
+    white-space: nowrap;
+
+    -webkit-mask: linear-gradient(90deg, transparent, #FFF, #FFF, transparent);
+    mask: linear-gradient(90deg, transparent, #FFF, #FFF, transparent);
+}
+
+.grid_scroll {
+    animation: scroll_grid_animate 20s ease-in-out infinite;
+    display: inline-block;
+}
+
+.grid_scroll img {
+    margin-left: -22px;
+}
+
+
+@keyframes scroll_grid_animate {
+    0% {
+        transform: translateX(0%)
+    }
+
+    50% {
+        transform: translateX(calc(-10% - .5rem))
+    }
+
+    100% {
+        transform: translateX(00%)
+    }
+}
+
 .wrapper {
+    position: relative;
+    z-index: 1;
+    width: 84%;
+
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 1fr;
@@ -66,13 +159,14 @@ h4 {
     grid-template-areas:
         "register trivia trivia";
     // gap: 2rem;
+    column-gap: 2rem;
 
     padding: 4rem 0;
     overflow: hidden;
 }
 
 .wrapper section {
-    margin: 2rem;
+    align-self: center;
 }
 
 .go_to_register {
@@ -85,9 +179,6 @@ h4 {
 
 .glow_card_bg {
     background-color: white;
-    // aspect-ratio: 1 / 1.5;
-    // width: 40dvw;
-
     border-radius: 2rem;
     position: relative;
     z-index: 0
@@ -113,24 +204,11 @@ h4 {
     border-radius: inherit;
 
 
-    background: #5eff01ba;
-    // background: linear-gradient(var(--gradient-angle),
-    //         var(red),
-    //         var(green));
-    // animation: rotation 10s linear infinite;
+    background-color: #5eff01ba;
+    filter: blur(8px);
 
-    filter: blur(8px)
 }
 
-// @keyframes rotation {
-//     0% {
-//         --gradient-angle: 0deg;
-//     }
-
-//     100% {
-//         --gradient-angle: 720deg;
-//     }
-// }
 
 
 .card_content {
@@ -147,6 +225,12 @@ h4 {
     border: 1px solid white;
 
     color: #5eff01;
+    transition:
+        background-color 0.3s cubic-bezier(0.46, 0.03, 0.56, 0.95),
+}
+
+.card_content:hover {
+    background-color: #151515;
 }
 
 .card_content .color_pink_h4 {

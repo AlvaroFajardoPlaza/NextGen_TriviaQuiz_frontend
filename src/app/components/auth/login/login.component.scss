@@ -19,6 +19,10 @@ h4 {
     background-color: #303030;
     color: white;
     border: 1px solid white;
+
+    transition:
+        background-color 0.3s cubic-bezier(0.46, 0.03, 0.56, 0.95),
+        box-shadow 0.3s cubic-bezier(0.46, 0.03, 0.56, 0.95);
 }
 
 
@@ -72,6 +76,8 @@ button:hover {
 
     form {
         background-color: #212121;
-        box-shadow: 8px 8px #303030;
+        box-shadow:
+            8px 8px #303030,
+            14px 14px #151515;
     }
 }

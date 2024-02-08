@@ -6,6 +6,16 @@
     outline: 1px solid #5eff01;
 }
 
+.logo_container {
+    margin: 2rem 0;
+    width: 100%;
+}
+
+.logo_container img {
+    width: 16dvw;
+    cursor: pointer;
+}
+
 .footer-basic ul {
     padding: 0;
     list-style: none;
@@ -38,8 +48,11 @@
     width: 48px;
     height: 48px;
     line-height: 46px;
+
     display: inline-block;
     text-align: center;
+
+
     border-radius: 50%;
     border: 1px solid #f4f4f4;
     margin: 0 8px;

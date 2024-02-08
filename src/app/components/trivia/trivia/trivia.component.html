@@ -2,6 +2,7 @@
 <!-- Hay que plantear el <li> dentro de la order list mediante un *ngFor de tal manera que realice un bucle por todas las preguntas que recibimos en nuestro servicio -->
 
 <!-- <pre>{{ triviaTest$ | async | json }}</pre> -->
+
 <section class="random_trivia_test">
     <div class="trivia_wrapper">
         
@@ -11,13 +12,15 @@
 				class="button go_back_button" 
 				data-bs-toggle="modal"
 				data-bs-target="#backToHomepage"
-				(click)="openGoBackModal()"
 				><i class="fa-solid fa-angles-left"></i> Go back
 			</button>
 
-			<span class="counter">{{ initialCounter }}</span>
+			<div class="counter_div">
+				<span class="counter">{{ initialCounter }}</span>
+			</div>
 		</div>
 
+		<form [formGroup]="user_trivia_solution" (ngSubmit)="onSubmit()">
         <ol class="trivia_list">
             <li class="trivia_list_item" *ngFor="let item of triviaTest$ | async; let i = index">
 
@@ -48,11 +51,14 @@
 
         <!-- Provisionalmente, y hasta que manejemos los resultados del test, 
 		el botón de send-results devolverá al usuario a la HomePage -->
-        <button 
-            class="button send_answers_button" 
-            (click)="navigateHome()"
-            >Send my answers <i class="fa-solid fa-angles-right"></i>
-        </button>
+		<div class="d-flex justify-content-end">
+			<button 
+				class="button send_answers_button" 
+				type="submit"
+				>Send my answers <i class="fa-solid fa-angles-right"></i>
+			</button>
+		</div>
+		</form>
     </div>
 </section>
 
@@ -64,14 +70,14 @@
 	aria-labelledby="backToHomepage"
 	aria-hidden="true"
 >
-	<div class="modal-dialog">
-		<div class="modal-content">
+	<div class="modal-dialog text-white">
+		<div class="modal-content bg-black shadow border border-white">
 			<div class="modal-body">
 				<p class="lead mt-3">
-					¿Estás seguro de que quieres volver a la página de inicio?
+					Are you sure you want to leave this trivia test?
 				</p>
 				<p class="text-danger">
-					Atención: una vez que abandones esta trivia, no se guardarán tus resultados. ****
+					<strong>Warning:</strong> If you leave the page, your results won't be saved.****
 				</p>
 			</div>
 			<div class="modal-footer">
@@ -80,7 +86,7 @@
 					class="btn btn-secondary"
 					data-bs-dismiss="modal"
 				>
-					Cancelar
+					Cancel
 				</button>
 				<button
 					(click)="navigateHome()"
@@ -88,7 +94,7 @@
 					class="btn btn-danger"
 					data-bs-dismiss="modal"
 				>
-					<i class="fa fa-square-minus"></i>
+					<i class="fa-solid fa-angles-left"></i>
 					Go back
 				</button>
 			</div>

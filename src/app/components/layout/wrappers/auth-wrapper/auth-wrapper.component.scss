@@ -1,6 +1,6 @@
 .auth_wrapper {
     padding: 4rem 0;
-    background-color: rgb(0, 0, 0);
+    background-color: #000000;
 
     display: flex;
     justify-content: center;
@@ -8,14 +8,57 @@
     gap: 2rem
 }
 
-.auth_wrapper div {
+.grid {
+    position: absolute;
+    z-index: 0;
+    width: 100%;
+
+    overflow: hidden;
+    padding: 1rem 0;
+    white-space: nowrap;
+
+    -webkit-mask: linear-gradient(90deg, transparent, #FFF, #FFF, transparent);
+    mask: linear-gradient(90deg, transparent, #FFF, #FFF, transparent);
+}
+
+.grid_scroll {
+    animation: scroll_grid_animate 20s ease-in-out infinite;
+    display: inline-block;
+}
+
+.grid_scroll img {
+    margin-left: -22px;
+}
+
+
+@keyframes scroll_grid_animate {
+    0% {
+        transform: translateX(0%)
+    }
+
+    50% {
+        transform: translateX(calc(-10% - .5rem))
+    }
+
+    100% {
+        transform: translateX(00%)
+    }
+}
+
+.login_container,
+.register_container {
+    position: relative;
+    z-index: 1;
+}
+
+.auth_wrapper .login_container {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 }
 
-.auth_wrapper div h4 {
+.auth_wrapper .login_container h4 {
 
     font-size: 1.4rem;
     width: 55%;
@@ -28,7 +71,7 @@ i {
     margin-bottom: .8rem;
 }
 
-.auth_wrapper div:hover {
+.login_container:hover {
     i {
         color: #ff2eb2;
     }

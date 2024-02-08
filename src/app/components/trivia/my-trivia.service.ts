@@ -13,12 +13,17 @@ export class MyTriviaService {
 
   // Llamada al trivia random
   getRandomTrivia(): Observable<Array<TriviaElement>> {
-    return this._http.get<Array<TriviaElement>>(`${environment.baseUrl}/trivia`)
+    return this._http.get<Array<TriviaElement>>(`${environment.baseUrl}/random_trivia`)
   }
 
   // Llamamos a las categorías
   getCategories(): Observable<Array<any>> {
     return this._http.get<Array<any>>(`${environment.baseUrl}/categories`)
+  }
+
+  // Función para obtener los resultados del trivia test
+  getTriviaAnswers() {
+    console.log("Solicitamos los resultados al server!")
   }
 
 }

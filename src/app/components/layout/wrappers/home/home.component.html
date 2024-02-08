@@ -1,17 +1,31 @@
 <!-- Esta es mi página inicial, desde donde podremos redirigirnos al login o register o comenzar a hacer un trivia quiz si ya estamos registrados! -->
+
+<!-- <pre>{{ categories$ | async | json }}</pre> -->
+
 <app-nav></app-nav>
 <div>
     <header class="header" id="header">
         <div class="container">
             <div class="header_wrap">
                 <div class="title">
-                    <!-- <h1>TriviaQuiz NextGen</h1> -->
-                    <img src="/assets/logo_provisional-02.png" alt="TriviaQuiz Logo" />
-                    <h4>Test your knowledge and<span class="title_span_color"> show what you know about the news!</span></h4>
-                    <hr style="color: #5eff01;">
+
+                    <div class="title_info_content">
+                        <div class="trivia_quiz_logo_container">
+                            <img src="/assets/logo_vertical_400px-06.png" alt="TriviaQuiz Logo" class="trivia_quiz_logo"/>
+                        </div>
+                        <h4>Test your knowledge and<span class="title_span_color"> show what you know about the news!</span>
+                        </h4>
+                        <hr>
+                    </div>
+                    
+                    <!-- IMAGOLOGO QUE ESTÁ EN EL FONDO -->
+                    <div class="imago_logo_container d-flex justify-content-center">
+                        <img src="/assets/NGMQ_LOGO_375px-03.png" alt="" class="imago_logo"/>
+                    </div>
+
                 </div>
             </div>
-    </div>
+        </div>
     </header>
 
     <!-- El main nos puede reconducir a la página de registro o a realizar una trivia -->
@@ -42,7 +56,7 @@
                             <button class="random_trivia_btn" (click)="goToRandomTrivia()" >Generate Random Trivia</button>
 
                             <select multiple>
-                                <option *ngFor="let category of categories$ | async" [value]="category.name">{{ category.name }}</option>
+                                <option *ngFor="let category of categories$ | async" [value]="category[1]">{{ category[1] }}</option>
                             </select>
 
                             <button class="categorized_trivia_btn">categorized trivia</button>
@@ -51,6 +65,14 @@
                 </div>
             </section>
         </main>
+
+        <div class="grid">
+            <div class="grid_scroll">
+                <img src="/assets/grid_green-07.png" />
+                <img src="/assets/grid_green-07.png" />
+            </div>
+        </div>
+
     </div>
 </div>
 
