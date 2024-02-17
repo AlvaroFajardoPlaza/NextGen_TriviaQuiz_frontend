@@ -15,7 +15,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PopUpComponent } from './components/layout/pop-up/pop-up.component';
 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -27,7 +26,7 @@ import { PopUpComponent } from './components/layout/pop-up/pop-up.component';
     TriviaWrapperComponent,
     AuthWrapperComponent,
     TriviaComponent,
-    PopUpComponent
+    PopUpComponent,
   ],
   imports: [
     BrowserModule,

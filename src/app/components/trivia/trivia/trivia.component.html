@@ -39,11 +39,11 @@
 
                 <div class="trivia_list_answer_wrapper mt-2">
                     <!-- Dentro de este select tenemos las tres posibles respuestas a la pregunta anterior -->
-                    <select>
-                        <option disabled value="">Por favor, selecciona una:</option>
-                        <option value="Answer 1">{{ item.ans2 }}</option>
-                        <option value="Answer 2">{{ item.ans1 }}</option>
-                        <option value="Answer 3">{{ item.ans3 }}</option>
+                    <select class="form-control" formControlName="user_answers">
+                        <option disabled [value]="">Por favor, selecciona una:</option>
+                        <option [value]="item.ans2">{{ item.ans2 }}</option>
+                        <option [value]="item.ans1">{{ item.ans1 }}</option>
+                        <option [value]="item.ans3">{{ item.ans3 }}</option>
                     </select>
                 </div>
             </li>

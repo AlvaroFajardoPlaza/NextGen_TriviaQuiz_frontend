@@ -54,12 +54,14 @@
                         <p class="text-light mb-5 mt-4">Choose between normal trivia or select categories for your game  <span class="text-info">(minimum 3)</span>.</p>
                         <div class="trivia_game_options">
                             <button class="random_trivia_btn" (click)="goToRandomTrivia()" >Generate Random Trivia</button>
+                            
+                            <form [formGroup]="categorizedForm" (ngSubmit)="onSubmit()">
+                                <select multiple class="form-control" formControlName="categories">
+                                    <option *ngFor="let category of categories$ | async" [value]="category[0]">{{ category[1] }}</option>
+                                </select>
+                                <button type="submit" class="categorized_trivia_btn mt-4">categorized trivia</button>
+                            </form>
 
-                            <select multiple>
-                                <option *ngFor="let category of categories$ | async" [value]="category[1]">{{ category[1] }}</option>
-                            </select>
-
-                            <button class="categorized_trivia_btn">categorized trivia</button>
                         </div>
                     </div>
                 </div>

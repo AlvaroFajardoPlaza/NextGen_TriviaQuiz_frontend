@@ -3,7 +3,7 @@ import { Observable, Subscription } from 'rxjs';
 import { TriviaElement } from 'src/app/data/models/TriviaElement.interface';
 import { MyTriviaService } from '../my-trivia.service';
 import { Router } from '@angular/router';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 
 @Component({
@@ -16,15 +16,19 @@ export class TriviaComponent implements OnInit{
   private _router = inject(Router)
   private _formBuilder = inject(FormBuilder)
 
+  // El triviaTest$ contiene las preguntas, pero puede poblarse de dos maneras
   triviaTest$: Observable<Array<any>> = this._triviaSvc.getRandomTrivia();
-  randomTest: Array<TriviaElement> = [];
 
   categories$: Observable<Array<any>> = this._triviaSvc.getCategories();
 
-  user_trivia_solution: FormGroup | any
-
+  
+  user_trivia_solution: FormGroup | any;
+  
+  
   constructor() {
-    this.initializeForm()
+    this.user_trivia_solution = this._formBuilder.group({
+      user_answers: ['', []],
+    })
   }
 
   ngOnInit(): void {
@@ -32,20 +36,28 @@ export class TriviaComponent implements OnInit{
     this.oneMinuteCounter()
   }
 
+  // TriviaTest$ lo poblamos con un trivia categorico
+
+
   // Cuando el usuario envíe un trivia test al backend, envía un formulario con las 10 preguntas y las respuestas elegidas.
-  initializeForm() {
-    this.user_trivia_solution = this._formBuilder.group({
-      // Aquí dentro manejamos las respuestas del user
-    })
+  sendAnswersForm() {
+    // this.user_trivia_solution = this._formBuilder.group({
+    //   answers: ['', [Validators.required]]
+    // })
   }
 
-  onSubmit() {
-    console.log("enviamos los datos de nuestro formulario a la ruta del backend para corregir")
+  async onSubmit() {
+    //console.log("enviamos nuestras respuestas para corregir")
+    console.log("Respuestas del usuario: ", this.user_trivia_solution.value)
+    const response = await this._triviaSvc.getTriviaAnswers(
+      this.user_trivia_solution.value
+    )
+    return response
   }
 
 
   // El initialCounter puede ser una variable que manejen los usuarios
-  initialCounter: number = 45
+  initialCounter: number = 59
   oneMinuteCounter() {
     const count: any = document.querySelector(".counter")
     // let counter = 60

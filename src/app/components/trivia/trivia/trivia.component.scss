@@ -1,7 +1,24 @@
 .random_trivia_test {
-    background: #151515;
     display: flex;
     justify-content: center;
+
+    background: linear-gradient(-45deg, #1a4600, black, #151515, #1a4600);
+    background-size: 400% 400%;
+    animation: gradient 15s ease infinite;
+}
+
+@keyframes gradient {
+    0% {
+        background-position: 20% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 20% 50%;
+    }
 }
 
 .trivia_wrapper {

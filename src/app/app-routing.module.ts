@@ -13,6 +13,7 @@ const routes: Routes = [
 
   // Las siguientes rutas corresponden con los trivia quizs y los usuarios identificados --> Auth Guard
   { path: 'trivia', component: TriviaWrapperComponent },
+  { path: 'categorized-trivia', component: TriviaWrapperComponent },
 
   { path: 'pop-up', component: PopUpComponent}
 

@@ -30,7 +30,7 @@ h4 {
 }
 
 .title {
-    height: 64dvh;
+    height: 72dvh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -85,16 +85,8 @@ hr {
 }
 
 .title .imago_logo_container img {
-    width: 64%;
+    width: 50%;
 }
-
-// .title img {
-//     margin-left: -2.4rem;
-//     cursor: pointer;
-//     width: 32rem;
-
-//     mix-blend-mode: difference;
-// }
 
 .title_span_color {
     color: #5eff01;

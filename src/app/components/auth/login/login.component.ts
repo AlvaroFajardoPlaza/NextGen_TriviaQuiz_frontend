@@ -32,7 +32,8 @@ export class LoginComponent {
       this.loginForm.value
     )
     console.log("Nuestra respuesta al login: ", response)
-    // this._router.navigate([''])
+    
+    this._router.navigate([''])
   }
 
 }

@@ -39,6 +39,8 @@ export class RegisterComponent {
       this.registerForm.value
     );
     console.log("Nuestra respuesta al register: ", response)
-    // await this._router.navigate([''])
+    
+    // Una vez que nos hemos registrado, podemos volver a la home
+    await this._router.navigate([''])
   }
 }
