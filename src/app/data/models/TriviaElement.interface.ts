@@ -1,8 +1,8 @@
 export interface TriviaElement {
     id: number;
-    question: string;
-    answer1: string;
-    answer2: string;
-    answer3: string;
+    pregunta: string;
+    ans1: string;
+    ans2: string;
+    ans3: string;
     category: number;
 }

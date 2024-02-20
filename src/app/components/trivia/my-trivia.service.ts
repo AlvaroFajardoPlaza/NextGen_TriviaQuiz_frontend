@@ -16,18 +16,39 @@ export class MyTriviaService {
     return this._http.get<Array<TriviaElement>>(`${environment.baseUrl}/random_trivia`)
   }
 
-  // Llamada a la trivia por categorias
-  getCategorizedTrivia(categories: any) {
-    console.log("Estas son las categorias que enviamos al back: ", categories)
-    const categorizedTriviaResult = firstValueFrom(
-      this._http.post<Array<TriviaElement>>(`${environment.baseUrl}/categorized_trivia`,
-    categories)
-    )
-    console.log("Nuestras preguntas para la trivia Categórica: ", categorizedTriviaResult)
+  // Esta función nos permite manejar los valores de las categorñias y mandarlas dentro de la url
+  sendCategoriesInUrl(categories: Record<number, boolean> ) {
+    //console.log("Estas son las categorias que enviamos al back: ", categories)
+    const categoriesToBack = Object.keys(categories).reduce((acc, id) => {
+      if (categories[+id]){
+        acc.push(+id)
+      }
+      return acc
+    }, [] as Array<number>)
 
-    // Tenemos que mandar este resultado a nuestro componente
-    return categorizedTriviaResult;
+    console.log("Estas son las categorias que enviamos al back: ", categoriesToBack)
+    return categoriesToBack
+  };
+
+
+
+  // Llamada a la trivia por categorias:
+  getCategorizedTrivia(categoriesToBack: Array<string>) {
+    try {
+      const categorizedTriviaResult = firstValueFrom(
+        this._http.post<Array<TriviaElement>>(`${environment.baseUrl}/categorized_trivia`,
+        categoriesToBack)
+      )
+      console.log("Nuestras preguntas para la trivia Categórica: ", categorizedTriviaResult)
+      // Tenemos que mandar este resultado a nuestro componente
+      return categorizedTriviaResult
+      
+    } catch(error) {
+      console.log("Parece que ha habido algún error: ", error)
+      return error
+    }
   }
+
 
 
   // Llamamos a las categorías

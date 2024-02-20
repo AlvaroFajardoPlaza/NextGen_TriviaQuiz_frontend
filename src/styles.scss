@@ -2,7 +2,41 @@
 
 /* Importing Bootstrap SCSS file. */
 // Podemos añadir y editar estilos globales en este fichero, siempre antes de hacer el import de bootstrap
-$primary: gold !default;
+$primary: #5eff01 !default;
 
 
 @import 'bootstrap/scss/bootstrap';
+
+.cursor_dot {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+
+    position: fixed;
+    z-index: 9999;
+    background-color: #5eff01;
+    mix-blend-mode: difference;
+
+
+    top: 0;
+    left: 0;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+}
+
+.cursor_outline {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+
+    position: fixed;
+    z-index: 9999;
+    border: 2px solid #5eff01;
+    mix-blend-mode: difference;
+
+
+    top: 0;
+    left: 0;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+}

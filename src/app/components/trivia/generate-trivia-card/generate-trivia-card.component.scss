@@ -1,0 +1,120 @@
+h4 {
+    font-family: "radwave", Helvetica, sans-serif;
+}
+
+.glow_card_bg>* {
+    position: relative;
+    z-index: 1;
+}
+
+/* @PROPERTY para crear nuestra variable personalizada de gradiente animado*/
+@property --gradient-angle {
+    syntax: "<angle>";
+    initial-value: 0deg;
+    inherits: false;
+}
+
+// .glow_card_bg::before {
+//     content: "";
+//     position: absolute;
+//     width: 100%;
+// height: 100%
+
+//     border-radius: inherit;
+
+
+//     background-color: #5eff01ba;
+//     filter: blur(8px);
+
+// }
+
+
+
+.card_content {
+    text-align: center;
+    background-color: rgb(33, 33, 33);
+    position: relative;
+    width: 100%;
+    height: 100%;
+    z-index: 99;
+
+    padding: 2rem;
+
+    border-radius: 2rem;
+    border: 1px solid white;
+
+    color: #5eff01;
+    transition:
+        background-color, box-shadow 0.3s cubic-bezier(0.46, 0.03, 0.56, 0.95),
+}
+
+.card_content:hover {
+    background-color: #151515;
+    box-shadow: 6px 6px #5eff01;
+}
+
+.card_content .color_pink_h4 {
+    color: #ff2eb2;
+}
+
+
+.trivia_game_options {
+    display: grid;
+    column-gap: 2rem;
+    row-gap: 1rem;
+    // gap: 1rem;
+    grid-column: 1fr 1fr;
+    grid-row: 1fr 1fr 1fr;
+    grid-template-areas:
+        "random select"
+        "random categorized"
+        "random categorized"
+    ;
+}
+
+.random_trivia_btn {
+    grid-area: random;
+}
+
+.trivia_game_options select {
+    grid-area: select;
+
+    background-color: #151515;
+    color: white;
+
+    padding: .6rem 1rem;
+    border-radius: 1rem;
+}
+
+.categorized_trivia_btn {
+    grid-area: categorized;
+}
+
+button {
+    background-color: #000000;
+
+    font-size: 1.4rem;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-family: "radwave", Helvetica, sans-serif;
+    line-height: 1.4rem;
+
+    color: #5eff01;
+    padding: 0.8rem;
+    border-radius: 1rem;
+    border: 1px solid #cecece;
+
+    transition:
+        background-color 0.3s cubic-bezier(0.46, 0.03, 0.56, 0.95),
+        color 0.3s cubic-bezier(0.46, 0.03, 0.56, 0.95),
+        box-shadow 0.3s cubic-bezier(0.46, 0.03, 0.56, 0.95);
+}
+
+button:hover {
+    background-color: #ff2eb2;
+    color: white;
+
+    box-shadow:
+        4px 4px #5eff01,
+        7px 7px #FFF;
+}

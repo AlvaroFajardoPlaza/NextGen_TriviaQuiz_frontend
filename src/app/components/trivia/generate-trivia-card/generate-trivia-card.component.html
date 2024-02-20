@@ -1,0 +1,38 @@
+<section class="go_to_trivia">
+    <div class="glow_card_bg">
+        <div class="card_content go_register_card">
+            <h4><span class="color_pink_h4">Let's play</span> Trivia!</h4>
+            <p class="text-light mb-5 mt-4">Choose between normal trivia or select categories for your game  <span class="text-info">(minimum 3)</span>.</p>
+            <div class="trivia_game_options">
+                <button class="random_trivia_btn" (click)="goToRandomTrivia()" >Generate Random Trivia</button>
+                
+                <!-- <form [formGroup]="categorizedForm" (ngSubmit)="onSubmit()">
+                    <select multiple class="form-control" formControlName="categories">
+                        <option *ngFor="let category of categories$ | async" [value]="category[0]">{{ category[1] }}</option>
+                    </select>
+                    <button type="submit" class="categorized_trivia_btn mt-4">categorized trivia</button>
+                </form> -->
+
+                <form [formGroup]="categorizedForm" (ngSubmit)="onSubmit()" class="text-light">
+
+                    <div *ngFor="let category of categories$ | async; let i=index" class="d-flex flex-wrap gap-2 my-2">
+                        <div class="custom-control custom-control-inline">
+                            <input type="checkbox" [id]="category[0]" [formControlName]="category[0]" class="form-check-input ms-2" />
+                        </div>
+                        <div>
+                            <label class="form-check-label" [for]="category[0]">{{ i + 1 }}, {{ category[1] }}</label>
+                        </div>
+                    </div>
+
+                    <!-- Validación desde el formControlName -->
+                    <div *ngIf="(categorizedForm.value | keyvalue ).length < 3"  class="mt-4 border border-danger rounded">
+                        <p class="text-danger mt-2">Select, at least, 3 categories.</p>
+                    </div>
+
+                    <button type="submit" class="categorized_trivia_btn mt-4">categorized trivia</button>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</section>
