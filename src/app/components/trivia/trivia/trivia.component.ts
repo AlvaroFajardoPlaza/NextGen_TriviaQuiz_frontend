@@ -1,111 +1,122 @@
-import { Component, OnInit, inject } from '@angular/core';
-import { Observable, Subscription, map, switchMap } from 'rxjs';
-import { TriviaElement } from 'src/app/data/models/TriviaElement.interface';
-import { MyTriviaService } from '../my-trivia.service';
+import { Component, inject } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-
+import { Observable, interval, map, switchMap, tap } from 'rxjs';
+import { TriviaElement } from 'src/app/data/models/TriviaElement';
+import { MyTriviaService } from '../my-trivia.service';
 
 @Component({
-  selector: 'app-trivia',
-  templateUrl: './trivia.component.html',
-  styleUrls: ['./trivia.component.scss']
+	selector: 'app-trivia',
+	templateUrl: './trivia.component.html',
+	styleUrls: ['./trivia.component.scss']
 })
-export class TriviaComponent implements OnInit{
-  private _triviaSvc = inject(MyTriviaService)
-  private _router = inject(Router)
-  private _activatedRoute = inject(ActivatedRoute)
-  private _formBuilder = inject(FormBuilder)
+export class TriviaComponent {
+	private _triviaSvc = inject(MyTriviaService);
+	private _router = inject(Router);
+	private _activatedRoute = inject(ActivatedRoute);
+	private _formBuilder = inject(FormBuilder);
 
-  // Las categorías que nos llegan desde params
-  selectedCategories: Array<string> = []
+	// EL formulario que recupera las respuestas del usuario
+	form = this._formBuilder.group({});
 
-  // El triviaTest$ contiene las preguntas, pero puede poblarse de dos maneras
-  triviaTest$: Observable<Array<TriviaElement>> | any = [];
-  //categorizedTest: Array<TriviaElement> = []
+	// Las categorías que nos llegan desde params
+	selectedCategories: Array<string> = [];
 
-  categories$: Observable<Array<any>> = this._triviaSvc.getCategories();
+	// El triviaTest$ contiene las preguntas, pero puede poblarse de dos maneras, desde la función isCategorizedOrRandom()
+	triviaTest$: Observable<Array<TriviaElement>> =
+		this._activatedRoute.queryParamMap.pipe(
+			map((params: ParamMap) => params.get('categoriesSelected')),
+			switchMap((categoriesSelected) => {
+				if (categoriesSelected === null) {
+					return this._triviaSvc.getRandomTrivia();
+				} else {
+					this.selectedCategories = JSON.parse(categoriesSelected);
 
-  user_trivia_solution: FormGroup | any;
-  
-  constructor() {
-    this.user_trivia_solution = this._formBuilder.group({
-      user_answers: ['', []],
-    })
-  }
+					console.log(
+						'Tenemos las categorias parseadas?????? ',
+						this.selectedCategories
+					);
+					return this._triviaSvc.getCategorizedTrivia(
+						this.selectedCategories
+					);
+				}
+			}),
+			tap((questions: Array<TriviaElement>) => {
+				this.buildForm(questions);
+			})
+		);
 
-  ngOnInit(): void {
-    console.log("renderizamos el componente trivia")
-    this.isCategorizedOrRandom();
-    this.oneMinuteCounter();
-  }
+	initialCounter: number = 9999;
+	timer$ = interval(1000).pipe(
+		map((_) => this.initialCounter--),
+		tap((_) => this.initialCounter == 0 && this.navigateHome())
+	);
 
+	// ngOnInit(): void {
+	// 	console.log('renderizamos el componente trivia');
+	// 	this.isCategorizedOrRandom();
+	// }
 
-  // Esta función es la que nos permite determinar si el usuario ha seleccionado un randomTrivia o un trivia por categorías.
-  // Primero analiza y parsea la información de la url y después determina a que función del servicio de trivia tiene que llamar.
-  isCategorizedOrRandom(): void {
-    // En esta función, primero, tenemos que parsear el array que recibimos por params
-    const categoriesInUrl = this._activatedRoute.snapshot.queryParamMap.get('categoriesSelected')
-    console.log("categorías que entran en la url: ", categoriesInUrl)
-    
-    // IF: Si el valor es nulo, lanzamos la función de random trivia
-    // ELSE: Una vez que tenemos las categorias parseadas, simplemente podemos llamar a la función del triviaSvc categórico!!
-    if (categoriesInUrl === null) {
-      // this.selectedCategories = new Array<string>();
-      this.triviaTest$ = this._triviaSvc.getRandomTrivia()
-    } else {
-      this.selectedCategories = JSON.parse(categoriesInUrl);
+	// // Esta función es la que nos permite determinar si el usuario ha seleccionado un randomTrivia o un trivia por categorías.
+	// // Primero analiza y parsea la información de la url y después determina a que función del servicio de trivia tiene que llamar.
+	// isCategorizedOrRandom(): void {
+	// 	const categoriesInUrl =
+	// 		this._activatedRoute.snapshot.queryParamMap.get(
+	// 			'categoriesSelected'
+	// 		);
+	// 	console.log('categorías que entran en la url: ', categoriesInUrl);
 
-      console.log("Tenemos las categorias parseadas?????? ", this.selectedCategories)
-      this.triviaTest$ = this._triviaSvc.getCategorizedTrivia(this.selectedCategories)
-    }
-    
-  };
+	// 	// IF: Si el valor es nulo, lanzamos la función de random trivia
+	// 	// ELSE: Una vez que tenemos las categorias parseadas, simplemente podemos llamar a la función del triviaSvc categórico!!
+	// 	if (categoriesInUrl === null) {
+	// 		this.triviaTest$ = this._triviaSvc.getRandomTrivia().pipe(
+	// 			tap((questions: Array<TriviaElement>) => {
+	// 				this.buildForm(questions);
+	// 			})
+	// 		);
+	// 	} else {
+	// 		this.selectedCategories = JSON.parse(categoriesInUrl);
 
+	// 		console.log(
+	// 			'Tenemos las categorias parseadas?????? ',
+	// 			this.selectedCategories
+	// 		);
+	// 		this.triviaTest$ = this._triviaSvc.getCategorizedTrivia(
+	// 			this.selectedCategories
+	// 		);
+	// 		//  .pipe(tap((userAnswers:any) => {
+	// 		//     this.buildForm(userAnswers)
+	// 		//   }));
+	// 	}
+	// }
 
-  // Cuando el usuario envíe un trivia test al backend, envía un formulario con las 10 preguntas y las respuestas elegidas.
-  sendAnswersForm() {
-    // this.user_trivia_solution = this._formBuilder.group({
-    //   answers: ['', [Validators.required]]
-    // })
-  }
+	// Tenemos que cargar nuestro form con el id de la pregunta y la respuesta marcada por el usuario.
+	buildForm(questions: Array<TriviaElement>): void {
+		for (const { id_pregunta } of questions) {
+			this.form.setControl(
+				id_pregunta.toString(),
+				this._formBuilder.control(null, Validators.required)
+			);
+		}
+	}
+	async onSubmit() {
+		// if (!this.form.valid) {
+		// 	return alert('Responde todas las preguntas hijo de la gran puta.');
+		// }
+		//console.log("enviamos nuestras respuestas para corregir")
+		console.log('Respuestas del usuario: ', this.form.value);
 
-  async onSubmit() {
-    //console.log("enviamos nuestras respuestas para corregir")
-    console.log("Respuestas del usuario: ", this.user_trivia_solution.value)
-    const response = await this._triviaSvc.getTriviaAnswers(
-      this.user_trivia_solution.value
-    )
-    return response
-  }
+		const response = await this._triviaSvc.getTriviaAnswers(
+			this.form.value
+		);
+		return response;
+	}
 
+	navigateHome() {
+		return this._router.navigate(['']);
+	}
 
-  // El initialCounter puede ser una variable que manejen los usuarios
-  initialCounter: number = 60
-  oneMinuteCounter() {
-    const count: any = document.querySelector(".counter")
-    // let counter = 60
-
-    setInterval(() => {
-      if(this.initialCounter > 0) {
-        this.initialCounter--;
-        count.innerHTML = this.initialCounter.toString();
-      // } else if(0 < this.initialCounter && this.initialCounter < 10) {
-      //   this.initialCounter--;
-      //   count.innerHTML = this.initialCounter.toString()
-      //   count.innerHTML = document.createAttribute(".hurry_up")
-      } else {
-        this.navigateHome()
-      }
-    }, 1000)
-  }
-
-  navigateHome() {
-    return this._router.navigate([''])
-  }
-
-  getResults() {
-    return console.log("Solicitamos los resultados al backend!")
-  }
-
+	getResults() {
+		return console.log('Solicitamos los resultados al backend!');
+	}
 }

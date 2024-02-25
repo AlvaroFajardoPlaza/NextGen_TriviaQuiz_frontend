@@ -4,62 +4,108 @@
 <!-- <pre>{{ triviaTest$ | async | json }}</pre> -->
 
 <section class="random_trivia_test">
-    <div class="trivia_wrapper">
-        
-        <!-- Este botón activa un pop-up modal que pregunta si queremos volver a la Homepage -->
-		<div class="trivia_head_ d-flex gap-4 justify-content-between align-items-center">
-			<button 
-				class="button go_back_button" 
+	<div class="trivia_wrapper">
+		<!-- Este botón activa un pop-up modal que pregunta si queremos volver a la Homepage -->
+		<div
+			class="trivia_head_ d-flex gap-4 justify-content-between align-items-center"
+		>
+			<button
+				class="button go_back_button"
 				data-bs-toggle="modal"
 				data-bs-target="#backToHomepage"
-				><i class="fa-solid fa-angles-left"></i> Go back
+			>
+				<i class="fa-solid fa-angles-left"></i> Go back
 			</button>
 
-			<div class="counter_div">
-				<span class="counter">{{ initialCounter }}</span>
+			<div class="counter_div" *ngIf="timer$ | async as timer">
+				<span class="counter">{{ timer }}</span>
 			</div>
 		</div>
 
-		<form [formGroup]="user_trivia_solution" (ngSubmit)="onSubmit()">
-        <ol class="trivia_list">
-            <li class="trivia_list_item" *ngFor="let item of triviaTest$ | async; let i = index">
-
-				<div class="d-flex gap-4 justify-content-between align-items-center">
-					<h1 class="list_item_num align-self-start">{{ i + 1 }}</h1>
-					<div class="list_item_category align-self-start">
-						<h4>{{item.category}}</h4>
+		<form [formGroup]="form" (ngSubmit)="onSubmit()">
+			<ol class="trivia_list">
+				<li
+					class="trivia_list_item"
+					*ngFor="let item of triviaTest$ | async; let i = index"
+				>
+					<div
+						class="d-flex gap-4 justify-content-between align-items-center"
+					>
+						<h2 class="list_item_num align-self-start">
+							{{ i + 1 }}
+						</h2>
+						<div class="list_item_category align-self-start">
+							<h4>{{ item.category }}</h4>
+						</div>
 					</div>
-				</div>
 
-                <hr>
-                <div class="d-flex gap-4 justify-content-start align-items-center">
-                    <!-- <h1 class="list_item_num align-self-start">{{ i + 1 }}</h1> -->
-                    <h4 class="list_item_question">{{ item.pregunta }}</h4>
-                </div>
+					<hr />
+					<div
+						class="d-flex gap-4 justify-content-start align-items-center"
+					>
+						<!-- <h1 class="list_item_num align-self-start">{{ i + 1 }}</h1> -->
+						<h4 class="list_item_question">{{ item.pregunta }}</h4>
+					</div>
 
-                <div class="trivia_list_answer_wrapper mt-2">
-                    <!-- Dentro de este select tenemos las tres posibles respuestas a la pregunta anterior -->
-                    <select class="form-control" formControlName="user_answers">
+					<div
+						class="trivia_list_answer_wrapper mt-2 form-check d-flex flex-column gap-2"
+					>
+						<!-- <select class="form-control" formControlName="user_answers">
                         <option disabled [value]="">Por favor, selecciona una:</option>
                         <option [value]="item.ans2">{{ item.ans2 }}</option>
                         <option [value]="item.ans1">{{ item.ans1 }}</option>
                         <option [value]="item.ans3">{{ item.ans3 }}</option>
-                    </select>
-                </div>
-            </li>
-        </ol>
+                    </select> -->
+						<!-- La lógica de las respuestas debemos de manejarla a través de un radio button
+					
+					Solo podemos seleccionar una respuesta de entre las tres posibles. -->
+						<label [for]="i" style="display: none">Answers:</label>
 
-        <!-- Provisionalmente, y hasta que manejemos los resultados del test, 
+						<label [for]="item.ans1">
+							<input
+								[id]="item.ans1"
+								type="radio"
+								[formControlName]="item.id_pregunta.toString()"
+								[value]="item.ans1"
+								class="form-check-input me-2"
+							/>
+							{{ item.ans1 }}
+						</label>
+
+						<label [for]="item.ans2">
+							<input
+								[id]="item.ans2"
+								type="radio"
+								[formControlName]="item.id_pregunta.toString()"
+								[value]="item.ans2"
+								class="form-check-input me-2"
+							/>
+							{{ item.ans2 }}
+						</label>
+
+						<label [for]="item.ans3">
+							<input
+								[id]="item.ans3"
+								type="radio"
+								[formControlName]="item.id_pregunta.toString()"
+								[value]="item.ans3"
+								class="form-check-input me-2"
+							/>
+							{{ item.ans3 }}
+						</label>
+					</div>
+				</li>
+			</ol>
+
+			<!-- Provisionalmente, y hasta que manejemos los resultados del test, 
 		el botón de send-results devolverá al usuario a la HomePage -->
-		<div class="d-flex justify-content-end">
-			<button 
-				class="button send_answers_button" 
-				type="submit"
-				>Send my answers <i class="fa-solid fa-angles-right"></i>
-			</button>
-		</div>
+			<div class="d-flex justify-content-end">
+				<button class="button send_answers_button" type="submit">
+					Send my answers <i class="fa-solid fa-angles-right"></i>
+				</button>
+			</div>
 		</form>
-    </div>
+	</div>
 </section>
 
 <!-- Nuestros pop-up modales -->
@@ -77,7 +123,8 @@
 					Are you sure you want to leave this trivia test?
 				</p>
 				<p class="text-danger">
-					<strong>Warning:</strong> If you leave the page, your results won't be saved.****
+					<strong>Warning:</strong> If you leave the page, your
+					results won't be saved.****
 				</p>
 			</div>
 			<div class="modal-footer">
@@ -101,3 +148,5 @@
 		</div>
 	</div>
 </div>
+
+<pre>{{ form.value | json }}</pre>

@@ -67,7 +67,7 @@ h4 {
     grid-row: 1fr 1fr 1fr;
     grid-template-areas:
         "random select"
-        "random categorized"
+        "random select"
         "random categorized"
     ;
 }
@@ -76,14 +76,25 @@ h4 {
     grid-area: random;
 }
 
-.trivia_game_options select {
+
+// Sección de las 13 categorias y boton de trivia categórico
+.categorized_trivia_selection {
     grid-area: select;
+    height: 100%;
 
     background-color: #151515;
     color: white;
 
+    border: 1px solid #5eff01;
+
     padding: .6rem 1rem;
     border-radius: 1rem;
+}
+
+.list_of_categories {
+    display: flex;
+
+    gap: 1rem;
 }
 
 .categorized_trivia_btn {
