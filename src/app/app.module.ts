@@ -15,6 +15,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PopUpComponent } from './components/layout/pop-up/pop-up.component';
 import { GenerateTriviaCardComponent } from './components/trivia/generate-trivia-card/generate-trivia-card.component';
+import { PollWrapperComponent } from './components/layout/wrappers/poll-wrapper/poll-wrapper.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { GenerateTriviaCardComponent } from './components/trivia/generate-trivia
     TriviaComponent,
     PopUpComponent,
     GenerateTriviaCardComponent,
+    PollWrapperComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
+import { Router } from '@angular/router';
 import {
 	BehaviorSubject,
 	Observable,
@@ -18,15 +19,20 @@ import { environment } from 'src/app/environments/environment';
 
 // Dentro de este componente vamos a manejar el registro, login, logout y otros servicios relacionados a los usuarios.
 export class AuthService {
+	private _router = inject(Router);
 	private _http = inject(HttpClient);
 
 	// Creamos nuestro New Behaviour Subject --> token
 	token$ = new BehaviorSubject<string>(localStorage.getItem('token') || '');
 
 	// Creamos nuestro Observable de usuario loggeado y autenticado
-	user$: Observable<any> = this.token$.pipe(
+	User$: Observable<any> = this.token$.pipe(
 		switchMap((token) => (!token ? '' : this.me()))
 	);
+
+	getAllUsers() {
+		return this._http.get(`${environment.baseUrl}/users`);
+	}
 
 	register(formValues: RegisterForm) {
 		// console.log("Los valores que mandamos en el registro: ", formValues)
@@ -61,7 +67,7 @@ export class AuthService {
 		});
 	}
 
-	// La función me() hace una llamada al backend para cptejar la info que existe en el token y autenticar al usuario
+	// La función me() hace una llamada al backend para cotejar la info que existe en el token y autenticar al usuario
 	me(): Observable<any> {
 		return this._http.post<any>(
 			`${environment.baseUrl}/me`,
@@ -74,5 +80,8 @@ export class AuthService {
 
 	log_out() {
 		console.log('Log out del user');
+		localStorage.removeItem('token');
+
+		return this._router.navigate(['auth']);
 	}
 }

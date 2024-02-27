@@ -1,8 +1,9 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/app/environments/environment';
-import { Observable, firstValueFrom } from 'rxjs';
+import { Observable, first, firstValueFrom } from 'rxjs';
 import { TriviaElement } from 'src/app/data/models/TriviaElement';
+import { User } from 'src/app/data/models/User';
 
 @Injectable({
 	providedIn: 'root'
@@ -56,8 +57,23 @@ export class MyTriviaService {
 	}
 
 	// Función para obtener los resultados del trivia test
-	getTriviaAnswers(answers: any) {
+	async getTriviaAnswers(answers: any, loggedUser: any) {
 		console.log('Estas son las respuestas enviadas por el user: ', answers);
-		console.log('Solicitamos los resultados al server!');
+		try {
+			let finalScore = await firstValueFrom(
+				this._http.post<Array<any>>(
+					`${environment.baseUrl}/get_trivia_answers`,
+					answers
+				)
+			);
+			console.log(
+				'Recibimos la corrección del test y la puntuación final: ',
+				finalScore
+			);
+			return finalScore;
+		} catch (error) {
+			console.log('Parece que ha habido un error', error);
+			throw error;
+		}
 	}
 }

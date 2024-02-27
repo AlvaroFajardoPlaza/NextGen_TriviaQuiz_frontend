@@ -1,0 +1,23 @@
+<app-nav></app-nav>
+<!-- <pre>{{ allUsers$ | async | json }}</pre> -->
+
+<div class="container">
+	<h2>Trivia Poll</h2>
+	<p class="text-start">
+		Dentro de este componente vamos a renderizar la lista de resultados de
+		los usuarios registrados.
+	</p>
+
+	<!-- Este va a ser nuestro listado -->
+	<div
+		*ngFor="let user of allUsers$ | async as users"
+		class="d-flex justify-content-between align-items-center"
+	>
+		<h4>{{ user[0] }}</h4>
+		<h4>{{ user[1] }}</h4>
+		<h4>Score >>> {{ user[4] }}</h4>
+		<h4>Trivias completed >>> {{ user[5] }}</h4>
+	</div>
+</div>
+
+<app-footer></app-footer>

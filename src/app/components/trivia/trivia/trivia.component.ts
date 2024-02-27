@@ -4,6 +4,8 @@ import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { Observable, interval, map, switchMap, tap } from 'rxjs';
 import { TriviaElement } from 'src/app/data/models/TriviaElement';
 import { MyTriviaService } from '../my-trivia.service';
+import { User } from 'src/app/data/models/User';
+import { AuthService } from '../../auth/auth.service';
 
 @Component({
 	selector: 'app-trivia',
@@ -12,12 +14,17 @@ import { MyTriviaService } from '../my-trivia.service';
 })
 export class TriviaComponent {
 	private _triviaSvc = inject(MyTriviaService);
+	private _authSvc = inject(AuthService);
 	private _router = inject(Router);
 	private _activatedRoute = inject(ActivatedRoute);
 	private _formBuilder = inject(FormBuilder);
 
-	// EL formulario que recupera las respuestas del usuario
+	// Comprobamos que existe un user
+	loggedUser$: Observable<User> = this._authSvc.User$;
+
+	// El formulario que recupera las respuestas del usuario
 	form = this._formBuilder.group({});
+	finalScore: string = '0';
 
 	// Las categorías que nos llegan desde params
 	selectedCategories: Array<string> = [];
@@ -46,7 +53,7 @@ export class TriviaComponent {
 			})
 		);
 
-	initialCounter: number = 9999;
+	initialCounter: number = 60;
 	timer$ = interval(1000).pipe(
 		map((_) => this.initialCounter--),
 		tap((_) => this.initialCounter == 0 && this.navigateHome())
@@ -100,23 +107,19 @@ export class TriviaComponent {
 		}
 	}
 	async onSubmit() {
-		// if (!this.form.valid) {
-		// 	return alert('Responde todas las preguntas hijo de la gran puta.');
-		// }
-		//console.log("enviamos nuestras respuestas para corregir")
-		console.log('Respuestas del usuario: ', this.form.value);
-
-		const response = await this._triviaSvc.getTriviaAnswers(
-			this.form.value
-		);
-		return response;
+		// Tenemos que mandar las respuestas y al usuario para devolver el resultado final y haber sumado ya el score.
+		try {
+			const response: any = await this._triviaSvc.getTriviaAnswers(
+				this.form.value,
+				this.loggedUser$
+			);
+			this.finalScore = response;
+		} catch (error) {
+			console.error('Algo ha salido mal');
+		}
 	}
 
 	navigateHome() {
 		return this._router.navigate(['']);
-	}
-
-	getResults() {
-		return console.log('Solicitamos los resultados al backend!');
 	}
 }

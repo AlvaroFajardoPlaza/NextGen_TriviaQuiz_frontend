@@ -1,24 +1,49 @@
 <!-- nav bar de la aplicación -->
 <div class="topnav" id="nav_bar">
-    <div class="topnav_links">
-        <div class="img_nav">
-          <img src="/assets/logo_vertical_400px-06.png" alt="TriviaQuiz Logo" (click)="goToHomepage()" />
-        </div>
-        <a href="#news">News</a>
-        <a href="#contact">Contact</a>
-        <a href="#about">About</a>
-    </div>
+	<div class="topnav_links">
+		<div class="img_nav">
+			<img
+				src="/assets/logo_vertical_400px-06.png"
+				alt="TriviaQuiz Logo"
+				(click)="goToHomepage()"
+			/>
+		</div>
+		<a href="#news">News</a>
+		<a href="#about">About</a>
+		<a alt="Trivia Poll" href="poll" (click)="goToPoll()">Trivia Poll</a>
+	</div>
 
-    <!-- Tenemos que considerar que exista el icono del usuario y que también redirija al register o login -->
-    <div class="d-flex justify-content-center align-items-center gap-2">
-      <div class="register_login_btn me-2">
-        <button class="btn_register text-light" (click)="navigateToRegister()">register / login
-          <i class="fa-solid fa-user ms-2"></i>
-        </button>
-      </div>
+	<!-- Tenemos que considerar que exista el icono del usuario y que también redirija al register o login -->
+	<div
+		class="isUserLogged d-flex justify-content-center align-items-center gap-1"
+		*ngIf="registeredUser$ | async as user"
+	>
+		<div class="register_login_btn me-2">
+			<button class="btn_register text-light">{{ user.username }}</button>
+		</div>
+		<div class="register_login_btn me-2">
+			<button class="btn_register text-light" (click)="LogOutUser()">
+				Cerrar sesión
+			</button>
+		</div>
+	</div>
 
-      <a href="javascript:void(0);" class="icon" (click)="myFunction()">
-        <i class="fa fa-bars"></i>
-      </a>
-  </div>
+	<div
+		class="d-flex justify-content-center align-items-center gap-2"
+		*ngIf="token$ == null"
+	>
+		<div class="register_login_btn me-2">
+			<button
+				class="btn_register text-light"
+				(click)="navigateToRegister()"
+			>
+				register / login
+				<i class="fa-solid fa-user ms-2"></i>
+			</button>
+		</div>
+
+		<a href="javascript:void(0);" class="icon" (click)="myFunction()">
+			<i class="fa fa-bars"></i>
+		</a>
+	</div>
 </div>

@@ -14,12 +14,6 @@ import { User } from 'src/app/data/models/User';
 export class HomeComponent {
 	private __router = inject(Router);
 
-	// Traemos nuestras llamadas a los servicios
-	private __trivisSvc = inject(MyTriviaService);
-	private __authSvc = inject(AuthService);
-
-	registeredUser$: Observable<User> = this.__authSvc.user$;
-
 	constructor() {}
 
 	navigateToRegisterLogin() {
