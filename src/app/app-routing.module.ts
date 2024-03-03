@@ -5,16 +5,19 @@ import { AuthWrapperComponent } from './components/layout/wrappers/auth-wrapper/
 import { TriviaWrapperComponent } from './components/layout/wrappers/trivia-wrapper/trivia-wrapper.component';
 import { PopUpComponent } from './components/layout/pop-up/pop-up.component';
 import { PollWrapperComponent } from './components/layout/wrappers/poll-wrapper/poll-wrapper.component';
+import { authGuard } from './core/guards/auth.guard';
 
 const routes: Routes = [
 	{ path: '', component: HomeComponent },
 	{ path: 'auth', component: AuthWrapperComponent },
 
 	// Las siguientes rutas corresponden con los trivia quizs y los usuarios identificados --> Auth Guard
-	{ path: 'trivia', component: TriviaWrapperComponent }, // Para realizar los tests
-	{ path: 'poll', component: PollWrapperComponent }, // Para ver las puntuaciones de los usuarios
-
-	{ path: 'pop-up', component: PopUpComponent }
+	{
+		path: 'trivia',
+		component: TriviaWrapperComponent,
+		canActivate: [authGuard]
+	}, // Para realizar los tests
+	{ path: 'poll', component: PollWrapperComponent, canActivate: [authGuard] } // Para ver las puntuaciones de los usuarios
 ];
 
 @NgModule({

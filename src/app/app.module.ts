@@ -11,35 +11,42 @@ import { LoginComponent } from './components/auth/login/login.component';
 import { TriviaWrapperComponent } from './components/layout/wrappers/trivia-wrapper/trivia-wrapper.component';
 import { AuthWrapperComponent } from './components/layout/wrappers/auth-wrapper/auth-wrapper.component';
 import { TriviaComponent } from './components/trivia/trivia/trivia.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PopUpComponent } from './components/layout/pop-up/pop-up.component';
 import { GenerateTriviaCardComponent } from './components/trivia/generate-trivia-card/generate-trivia-card.component';
 import { PollWrapperComponent } from './components/layout/wrappers/poll-wrapper/poll-wrapper.component';
+import { AuthInterceptor } from './core/interceptors/auth.interceptor';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    NavComponent,
-    FooterComponent,
-    HomeComponent,
-    RegisterComponent,
-    LoginComponent,
-    TriviaWrapperComponent,
-    AuthWrapperComponent,
-    TriviaComponent,
-    PopUpComponent,
-    GenerateTriviaCardComponent,
-    PollWrapperComponent,
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
-    FormsModule,
-    ReactiveFormsModule,
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+	declarations: [
+		AppComponent,
+		NavComponent,
+		FooterComponent,
+		HomeComponent,
+		RegisterComponent,
+		LoginComponent,
+		TriviaWrapperComponent,
+		AuthWrapperComponent,
+		TriviaComponent,
+		PopUpComponent,
+		GenerateTriviaCardComponent,
+		PollWrapperComponent
+	],
+	imports: [
+		BrowserModule,
+		AppRoutingModule,
+		HttpClientModule,
+		FormsModule,
+		ReactiveFormsModule
+	],
+	providers: [
+		{
+			provide: HTTP_INTERCEPTORS,
+			useClass: AuthInterceptor,
+			multi: true
+		}
+	],
+	bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

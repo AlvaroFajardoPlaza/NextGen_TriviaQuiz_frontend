@@ -1,5 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/app/environments/environment';
 import { Observable, first, firstValueFrom } from 'rxjs';
 import { TriviaElement } from 'src/app/data/models/TriviaElement';
@@ -16,6 +16,7 @@ export class MyTriviaService {
 	getRandomTrivia(): Observable<Array<TriviaElement>> {
 		return this._http.get<Array<TriviaElement>>(
 			`${environment.baseUrl}/random_trivia`
+			// this.createHeaders()
 		);
 	}
 
@@ -64,11 +65,8 @@ export class MyTriviaService {
 				this._http.post<Array<any>>(
 					`${environment.baseUrl}/get_trivia_answers`,
 					answers
+					// this.createHeaders()
 				)
-			);
-			console.log(
-				'Recibimos la corrección del test y la puntuación final: ',
-				finalScore
 			);
 			return finalScore;
 		} catch (error) {
@@ -76,4 +74,14 @@ export class MyTriviaService {
 			throw error;
 		}
 	}
+
+	// Esta función nos permite configurar los headers para nuestras llamadas HTTP.
+	// Pero tener que implementarla en cada llamada no es óptimo
+	// createHeaders() {
+	// 	return {
+	// 		headers: new HttpHeaders({
+	// 			Authorization: localStorage.getItem('token')!
+	// 		})
+	// 	};
+	// }
 }
