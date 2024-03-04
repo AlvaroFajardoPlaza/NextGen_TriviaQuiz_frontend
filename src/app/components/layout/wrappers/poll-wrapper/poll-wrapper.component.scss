@@ -1,0 +1,88 @@
+#poll_trivia_container {
+    box-sizing: border-box;
+    margin: 0;
+
+    background: linear-gradient(-45deg, #e73c7e, black, #5eff01);
+    background-size: 400% 400%;
+    animation: poll_background 15s ease infinite;
+
+    color: white;
+}
+
+@keyframes poll_background {
+    0% {
+        background-position: 20% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 20% 50%;
+    }
+}
+
+
+
+._intro_ {
+    padding-block: 4rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    text-align: center;
+}
+
+._intro_ h2 {
+    font-family: "radwave", Helvetica, sans-serif;
+    margin-bottom: 2rem;
+}
+
+._intro_ input {
+    background-color: #151515;
+    color: white;
+
+    padding: .6rem 1rem;
+    border-radius: 1rem;
+
+    border: 1px solid white;
+}
+
+
+._intro_ button {
+    background-color: #000000;
+
+    font-size: 1.4rem;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-family: "radwave", Helvetica, sans-serif;
+    line-height: 1.4rem;
+
+    color: #5eff01;
+    padding: 0.8rem;
+    border-radius: 1rem;
+    border: 1px solid #cecece;
+
+    transition:
+        background-color 0.3s cubic-bezier(0.46, 0.03, 0.56, 0.95),
+        color 0.3s cubic-bezier(0.46, 0.03, 0.56, 0.95),
+        box-shadow 0.3s cubic-bezier(0.46, 0.03, 0.56, 0.95);
+}
+
+._intro_ button:hover {
+    background-color: #ff2eb2;
+    color: white;
+
+    box-shadow:
+        4px 4px #5eff01,
+        7px 7px #FFF;
+}
+
+
+.user_poll_list {
+   padding-block: 4rem;
+}
+
+

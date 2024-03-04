@@ -1,23 +1,39 @@
 <app-nav></app-nav>
 <!-- <pre>{{ allUsers$ | async | json }}</pre> -->
 
-<div class="container">
-	<h2>Trivia Poll</h2>
-	<p class="text-start">
-		Dentro de este componente vamos a renderizar la lista de resultados de
-		los usuarios registrados.
-	</p>
+<div id="poll_trivia_container">
+	<section class="_intro_">
+		<h2>Welcome to the Trivia Poll</h2>
+		<p>
+			Explore the results obtained by the users and their position in the
+			poll. You can also try searching for a user.
+		</p>
+		<div class="search_for_user d-flex gap-2">
+			<input type="text" placeholder="Insert a username" />
+			<button class="personalized_search_button">Search</button>
+		</div>
+	</section>
 
-	<!-- Este va a ser nuestro listado -->
-	<div
-		*ngFor="let user of allUsers$ | async as users"
-		class="d-flex justify-content-between align-items-center"
-	>
-		<h4>{{ user[0] }}</h4>
-		<h4>{{ user[1] }}</h4>
-		<h4>Score >>> {{ user[4] }}</h4>
-		<h4>Trivias completed >>> {{ user[5] }}</h4>
-	</div>
+	<section class="user_poll_list container">
+		<div class="d-flex justify-content-between">
+			<h5>Position</h5>
+			<h5>Username</h5>
+			<h5>Total Score</h5>
+			<h5>Num. Trivias Completed</h5>
+			<h5>Percentage of right answers</h5>
+		</div>
+		<hr />
+		<div
+			*ngFor="let user of allUsers$ | async as users; let i = index"
+			class="d-flex justify-content-between align-items-center border border-success p-2 my-2 rounded bg-dark text-white"
+		>
+			<h4>{{ i + 1 }}</h4>
+			<h4>{{ user.username }}</h4>
+			<h4>{{ user.score }}</h4>
+			<h4>{{ user.trivias_completed }}</h4>
+			<h4>{{ user.percentage }} %</h4>
+		</div>
+	</section>
 </div>
 
 <app-footer></app-footer>

@@ -4,50 +4,73 @@
 
 <app-nav></app-nav>
 <div>
-    <header class="header" id="header">
-        <div class="container">
-            <div class="header_wrap">
-                <div class="title">
+	<header class="header" id="header">
+		<div class="container">
+			<div class="header_wrap">
+				<div class="title">
+					<div class="title_info_content">
+						<div class="trivia_quiz_logo_container">
+							<img
+								src="/assets/logo_vertical_400px-06.png"
+								alt="TriviaQuiz Logo"
+								class="trivia_quiz_logo"
+							/>
+						</div>
+						<h4>
+							Test your knowledge and<span
+								class="title_span_color"
+							>
+								show what you know about the news!</span
+							>
+						</h4>
+						<hr />
+					</div>
 
-                    <div class="title_info_content">
-                        <div class="trivia_quiz_logo_container">
-                            <img src="/assets/logo_vertical_400px-06.png" alt="TriviaQuiz Logo" class="trivia_quiz_logo"/>
-                        </div>
-                        <h4>Test your knowledge and<span class="title_span_color"> show what you know about the news!</span>
-                        </h4>
-                        <hr>
-                    </div>
-                    
-                    <!-- IMAGOLOGO QUE ESTÁ EN EL FONDO -->
-                    <div class="imago_logo_container d-flex justify-content-center">
-                        <img src="/assets/NGMQ_LOGO_375px-03.png" alt="" class="imago_logo"/>
-                    </div>
+					<!-- IMAGOLOGO QUE ESTÁ EN EL FONDO -->
+					<div
+						class="imago_logo_container d-flex justify-content-center"
+					>
+						<img
+							src="/assets/NGMQ_LOGO_375px-03.png"
+							alt=""
+							class="imago_logo"
+						/>
+					</div>
+				</div>
+			</div>
+		</div>
+	</header>
 
-                </div>
-            </div>
-        </div>
-    </header>
+	<!-- El main nos puede reconducir a la página de registro o a realizar una trivia -->
+	<div class="wrapper_contained">
+		<main class="wrapper">
+			<!-- REDIRIGIMOS A LA PÁGINA DE REGISTRO -->
+			<section class="go_to_register">
+				<div class="glow_card_bg">
+					<div class="card_content go_register_card">
+						<h4>Before you start...</h4>
+						<p class="text-start mt-4">
+							You need to create a user account to start playing
+							TriviaQuiz.
 
-    <!-- El main nos puede reconducir a la página de registro o a realizar una trivia -->
-    <div class="wrapper_contained">
-        <main class="wrapper">
-            <!-- REDIRIGIMOS A LA PÁGINA DE REGISTRO -->
-            <section class="go_to_register">
-                <div class="glow_card_bg">
-                    <div class="card_content go_register_card">
-                        <h4>Before you start...</h4>
-                        <p class="text-start mt-4">You need to create a user account to start playing TriviaQuiz.
+							<br /><br />
+							<span class=""
+								>You will be able to enter the classification
+								and compete against other users!</span
+							>
+						</p>
+						<button
+							(click)="navigateToRegisterLogin()"
+							class="mt-4"
+						>
+							register<span class="fw-bolder"> / </span>login
+						</button>
+					</div>
+				</div>
+			</section>
 
-                            <br><br>
-                            <span class="">You will be able to enter the classification and compete against other users!</span>
-                        </p>
-                        <button (click)="navigateToRegisterLogin()" class="mt-4">register<span class="fw-bolder"> / </span>login</button>
-                    </div>
-                </div>
-            </section>
-
-            <!-- CARD PARA REALIZAR UNA TRIVIA -->
-            <!-- <section class="go_to_trivia">
+			<!-- CARD PARA REALIZAR UNA TRIVIA -->
+			<!-- <section class="go_to_trivia">
                 <div class="glow_card_bg">
                     <div class="card_content go_register_card">
                         <h4><span class="color_pink_h4">Let's play</span> Trivia!</h4>
@@ -66,18 +89,18 @@
                     </div>
                 </div>
             </section> -->
-            <app-generate-trivia-card class="go_to_trivia me-4"></app-generate-trivia-card>
-            
-        </main>
+			<app-generate-trivia-card
+				class="go_to_trivia me-4"
+			></app-generate-trivia-card>
+		</main>
 
-        <div class="grid">
-            <div class="grid_scroll">
-                <img src="/assets/grid_green-07.png" />
-                <img src="/assets/grid_green-07.png" />
-            </div>
-        </div>
-
-    </div>
+		<div class="grid">
+			<div class="grid_scroll">
+				<img src="/assets/grid_green-07.png" />
+				<img src="/assets/grid_green-07.png" />
+			</div>
+		</div>
+	</div>
 </div>
 
 <app-footer></app-footer>

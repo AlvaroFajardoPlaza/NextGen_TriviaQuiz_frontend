@@ -107,7 +107,13 @@
 
 			<!-- Provisionalmente, y hasta que manejemos los resultados del test, 
 		el botón de send-results devolverá al usuario a la HomePage -->
-			<div class="d-flex justify-content-end">
+			<div
+				class="trivia_head_ d-flex gap-4 justify-content-between align-items-center"
+			>
+				<div class="counter_div" *ngIf="timer$ | async as timer">
+					<span class="counter">{{ timer }}</span>
+				</div>
+
 				<button
 					class="button send_answers_button"
 					type="submit"

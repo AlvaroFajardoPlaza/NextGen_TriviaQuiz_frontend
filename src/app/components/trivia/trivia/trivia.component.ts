@@ -53,7 +53,7 @@ export class TriviaComponent {
 			})
 		);
 
-	initialCounter: number = 60;
+	initialCounter: number = 75;
 	timer$ = interval(1000).pipe(
 		map((_) => this.initialCounter--),
 		tap((_) => this.initialCounter == 0 && this.navigateHome())

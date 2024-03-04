@@ -8,15 +8,8 @@ import { User } from 'src/app/data/models/User';
 	templateUrl: './poll-wrapper.component.html',
 	styleUrls: ['./poll-wrapper.component.scss']
 })
-export class PollWrapperComponent implements OnInit {
+export class PollWrapperComponent {
 	private _authSvc = inject(AuthService);
 
 	allUsers$: Observable<Array<User>> | any = this._authSvc.getAllUsers();
-	users: Array<User> = [];
-
-	ngOnInit(): void {
-		this.users = this.allUsers$;
-	}
-
-	// Dentro de este componente, tenemos que hacer una llamada a todos los usuarios de la bbdd y recoger su username, score y trivias completed
 }
