@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
-import { Observable, interval, map, switchMap, tap } from 'rxjs';
+import { Observable, interval, map, switchMap, tap, timer } from 'rxjs';
 import { TriviaElement } from 'src/app/data/models/TriviaElement';
 import { MyTriviaService } from '../my-trivia.service';
 import { User } from 'src/app/data/models/User';
@@ -34,9 +34,12 @@ export class TriviaComponent {
 		this._activatedRoute.queryParamMap.pipe(
 			map((params: ParamMap) => params.get('categoriesSelected')),
 			switchMap((categoriesSelected) => {
+				// Dentro de esta ruta entramos siempre que no seleccionemos el trivia categórico.
 				if (categoriesSelected === null) {
 					return this._triviaSvc.getRandomTrivia();
-				} else {
+				}
+				// Solicitamos nuestro triviaTest en base a las categorias que mandamos por el front
+				else {
 					this.selectedCategories = JSON.parse(categoriesSelected);
 
 					console.log(
@@ -48,14 +51,45 @@ export class TriviaComponent {
 					);
 				}
 			}),
+
+			// Esta lógica, nos construye el formulario
 			tap((questions: Array<TriviaElement>) => {
 				this.buildForm(questions);
 			})
 		);
 
-	initialCounter: number = 75;
+	// Vamos a replicar la lógica para crear nuestro triviaTest$
+	// triviaTest_2$: Observable<Array<TriviaElement>> =
+	// 	this._activatedRoute.queryParamMap.pipe(
+	// 		map((params: ParamMap) => params.get('categoriesSelected')),
+	// 		switchMap((categoriesSelected) => {
+	// 			if (categoriesSelected === null) {
+	// 				return this._triviaSvc.getRandomTrivia();
+	// 			} else {
+	// 				this.selectedCategories = JSON.parse(categoriesSelected);
+	// 				console.log(
+	// 					'Tenemos las categorias parseadas???',
+	// 					this.selectedCategories
+	// 				);
+	// 				return this._triviaSvc.getCategorizedTrivia(
+	// 					this.selectedCategories
+	// 				);
+	// 			}
+	// 		}),
+	// 		// En este switchMap, solicitamos las preguntas que se mandarán después al formulario
+	// 		switchMap((questions) => {
+	// 			return this._triviaSvc.getRealQuestions(questions);
+	// 		}),
+
+	// 		// Esta lógica construye el formulario
+	// 		tap((realQuestions: Array<TriviaElement>) => {
+	// 			this.buildForm(realQuestions);
+	// 		})
+	// 	);
+
+	initialCounter: number = 9999;
 	timer$ = interval(1000).pipe(
-		map((_) => this.initialCounter--),
+		map((_) => (this.initialCounter = this.initialCounter - 1)),
 		tap((_) => this.initialCounter == 0 && this.navigateHome())
 	);
 

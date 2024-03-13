@@ -75,6 +75,11 @@ export class MyTriviaService {
 		}
 	}
 
+	getRealQuestions(questions: Array<TriviaElement>) {
+		console.log('Tenemos que pedir bien todas las preguntas');
+		return;
+	}
+
 	// Esta función nos permite configurar los headers para nuestras llamadas HTTP.
 	// Pero tener que implementarla en cada llamada no es óptimo
 	// createHeaders() {

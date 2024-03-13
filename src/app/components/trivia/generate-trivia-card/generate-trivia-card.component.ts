@@ -64,9 +64,6 @@ export class GenerateTriviaCardComponent {
 					const paramsAsArray = this._triviaSvc.sendCategoriesInUrl(
 						this.categorizedForm.value as any
 					);
-					// console.log("Esta es la respuesta que recibimos y que tenemos que mandar al componente de 'trivia': ", response)
-					// // this._router.navigate(['trivia']);
-					// return response
 
 					// Navegamos al componente trivia, configurando en la url los ids de las categorías seleccionadas
 					console.log('Mis urlParams:, ', paramsAsArray);
