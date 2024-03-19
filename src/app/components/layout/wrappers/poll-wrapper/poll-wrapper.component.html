@@ -2,38 +2,79 @@
 <!-- <pre>{{ allUsers$ | async | json }}</pre> -->
 
 <div id="poll_trivia_container">
-	<section class="_intro_">
-		<h2>Welcome to the Trivia Poll</h2>
-		<p>
-			Explore the results obtained by the users and their position in the
-			poll. You can also try searching for a user.
-		</p>
-		<div class="search_for_user d-flex gap-2">
-			<input type="text" placeholder="Insert a username" />
-			<button class="personalized_search_button">Search</button>
-		</div>
-	</section>
+	<!-- Intro Hero Section to the poll -->
+	<main class="container">
+		<section class="_intro_">
+			<h2>Welcome to the Trivia Poll</h2>
+			<p>
+				Explore the results obtained by the users and their position in
+				the poll. You can also try searching for a user.
+			</p>
+			<div>
+				<form
+					class="search_for_user_form"
+					[formGroup]="searchForUserForm"
+					(ngSubmit)="filterUsers(filter.value)"
+				>
+					<input
+						#filter
+						type="text"
+						placeholder="Insert a username"
+						class="form-control"
+					/>
+					<button
+						type="submit"
+						class="personalized_search_button"
+						(keyup)="filterUsers(filter.value)"
+					>
+						Search
+					</button>
+				</form>
+			</div>
+		</section>
 
-	<section class="user_poll_list container">
-		<div class="d-flex justify-content-between">
-			<h5>Position</h5>
-			<h5>Username</h5>
-			<h5>Total Score</h5>
-			<h5>Num. Trivias Completed</h5>
-			<h5>Percentage of right answers</h5>
-		</div>
-		<hr />
-		<div
-			*ngFor="let user of allUsers$ | async as users; let i = index"
-			class="d-flex justify-content-between align-items-center border border-success p-2 my-2 rounded bg-dark text-white"
-		>
-			<h4>{{ i + 1 }}</h4>
-			<h4>{{ user.username }}</h4>
-			<h4>{{ user.score }}</h4>
-			<h4>{{ user.trivias_completed }}</h4>
-			<h4>{{ user.percentage }} %</h4>
-		</div>
-	</section>
+		<!-- USERS DATA POLL TABLE -->
+		<section class="users_data_table mx-3 pb-4">
+			<table class="table table-dark table-striped">
+				<thead class="table-light">
+					<tr>
+						<th class="fs-6">Position</th>
+						<th class="fs-6">Username</th>
+						<th class="fs-6">Total Score</th>
+						<th class="fs-6">#Trivias Completed</th>
+						<th class="fs-6">Percentage of right answers</th>
+					</tr>
+				</thead>
+
+				<tbody>
+					<ng-container
+						*ngFor="
+							let user of filteredUsersList$ | async as users;
+							let i = index
+						"
+					>
+						<tr class="tb_individual_row">
+							<td>
+								<p>{{ i + 1 }}</p>
+							</td>
+							<td>
+								<p>{{ user.username }}</p>
+							</td>
+							<td>
+								<p>{{ user.score }}</p>
+							</td>
+							<td>
+								<p>{{ user.trivias_completed }}</p>
+							</td>
+							<td>
+								<p>{{ user.percentage }} %</p>
+							</td>
+						</tr>
+					</ng-container>
+				</tbody>
+			</table>
+		</section>
+	</main>
 </div>
 
 <app-footer></app-footer>

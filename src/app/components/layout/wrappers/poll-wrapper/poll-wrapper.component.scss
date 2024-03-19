@@ -80,9 +80,14 @@
         7px 7px #FFF;
 }
 
-
-.user_poll_list {
-   padding-block: 4rem;
+.search_for_user_form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
 }
 
-
+.users_data_table table {
+    margin-bottom: 0;
+    user-select: none;
+}
