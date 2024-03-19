@@ -1,6 +1,4 @@
 <!-- Dentro de este template vamos a recibir los datos del primer trivia test -->
-<!-- Hay que plantear el <li> dentro de la order list mediante un *ngFor de tal manera que realice un bucle por todas las preguntas que recibimos en nuestro servicio -->
-
 <!-- <pre>{{ triviaTest$ | async | json }}</pre> -->
 
 <section class="random_trivia_test">
@@ -30,7 +28,7 @@
 			</div>
 		</div>
 
-		<form [formGroup]="form" (ngSubmit)="onSubmit()">
+		<form [formGroup]="userAnswersForm" (ngSubmit)="onSubmit()">
 			<ol class="trivia_list">
 				<li
 					class="trivia_list_item"
@@ -169,7 +167,7 @@
 	</div>
 </div>
 
-<pre>{{ form.value | json }}</pre>
+<!-- <pre>{{ userAnswersForm.value | json }}</pre> -->
 <!-- <pre>{{ loggedUser$ | async | json }}</pre> -->
 
 <!-- Pop-up con la score final en el triviaTest -->
